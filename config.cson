@@ -38,6 +38,9 @@
     ensureSingleTrailingNewline: false
     ignoreWhitespaceOnCurrentLine: false
     ignoreWhitespaceOnlyLines: true
+".basic.html.source":
+  editor:
+    tabLength: 4
 ".basic.html.text":
   editor:
     tabLength: 4
@@ -51,9 +54,6 @@
   editor:
     showInvisibles: false
     softWrap: true
-    tabLength: 4
-".html.basic.source":
-  editor:
     tabLength: 4
 ".java.source":
   editor:

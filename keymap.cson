@@ -54,3 +54,4 @@
   'pagedown': 'autocomplete-plus:move-down'
   'home': 'autocomplete-plus:move-to-top'
   'end': 'autocomplete-plus:move-to-bottom'
+  'shift-enter': 'editor:newline'
