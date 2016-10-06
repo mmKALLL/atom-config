@@ -1,19 +1,30 @@
 "*":
+  "autoclose-html": {}
+  "autocomplete-plus":
+    confirmCompletion: "enter"
+    useCoreMovementCommands: false
   core:
+    allowPendingPaneItems: false
+    automaticallyUpdate: false
     disabledPackages: [
       "linter-js-standard"
       "fast-eslint"
       "linter-eslint"
     ]
     openEmptyEditorOnStart: false
+    packagesWithKeymapsDisabled: [
+      "autoclose-html"
+    ]
     themes: [
       "atom-dark-ui"
       "atom-dark-syntax"
     ]
   editor:
+    backUpBeforeSaving: true
     scrollPastEnd: true
     scrollSensitivity: 60
     softWrap: true
+    zoomFontWhenCtrlScrolling: false
   "exception-reporting":
     userId: "83917c78-9c35-f970-8767-722c39816fca"
   "linter-js-standard":
@@ -23,6 +34,13 @@
     hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
+  whitespace:
+    ensureSingleTrailingNewline: false
+    ignoreWhitespaceOnCurrentLine: false
+    ignoreWhitespaceOnlyLines: true
+".basic.html.text":
+  editor:
+    tabLength: 4
 ".c.source":
   editor:
     tabLength: 4
@@ -33,6 +51,9 @@
   editor:
     showInvisibles: false
     softWrap: true
+    tabLength: 4
+".html.basic.source":
+  editor:
     tabLength: 4
 ".java.source":
   editor:
