@@ -1,0 +1,45 @@
+"*":
+  core:
+    disabledPackages: [
+      "linter-js-standard"
+      "fast-eslint"
+      "linter-eslint"
+    ]
+    openEmptyEditorOnStart: false
+    themes: [
+      "atom-dark-ui"
+      "atom-dark-syntax"
+    ]
+  editor:
+    scrollPastEnd: true
+    scrollSensitivity: 60
+    softWrap: true
+  "exception-reporting":
+    userId: "83917c78-9c35-f970-8767-722c39816fca"
+  "linter-js-standard":
+    showEslintRules: true
+  "one-dark-ui": {}
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  welcome:
+    showOnStartup: false
+".c.source":
+  editor:
+    tabLength: 4
+".cpp.source":
+  editor:
+    tabLength: 4
+".gfm.source":
+  editor:
+    showInvisibles: false
+    softWrap: true
+    tabLength: 4
+".java.source":
+  editor:
+    tabLength: 4
+".python.source":
+  editor:
+    tabLength: 4
+".shell.source":
+  editor:
+    tabLength: 4
