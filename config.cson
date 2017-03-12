@@ -2,6 +2,7 @@
   "autoclose-html": {}
   "autocomplete-plus":
     confirmCompletion: "enter"
+    minimumWordLength: 1
     useCoreMovementCommands: false
   core:
     allowPendingPaneItems: false
@@ -15,6 +16,7 @@
     packagesWithKeymapsDisabled: [
       "autoclose-html"
     ]
+    telemetryConsent: "no"
     themes: [
       "atom-dark-ui"
       "atom-dark-syntax"
@@ -23,7 +25,6 @@
     backUpBeforeSaving: true
     scrollPastEnd: true
     scrollSensitivity: 60
-    softWrap: true
     zoomFontWhenCtrlScrolling: false
   "exception-reporting":
     userId: "83917c78-9c35-f970-8767-722c39816fca"
@@ -38,6 +39,9 @@
     ensureSingleTrailingNewline: false
     ignoreWhitespaceOnCurrentLine: false
     ignoreWhitespaceOnlyLines: true
+  wordcount:
+    alwaysOn: true
+    noextension: true
 ".basic.html.source":
   editor:
     tabLength: 4
