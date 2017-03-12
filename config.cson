@@ -11,6 +11,7 @@
       "linter-js-standard"
       "fast-eslint"
       "linter-eslint"
+      "linter-javac"
     ]
     openEmptyEditorOnStart: false
     packagesWithKeymapsDisabled: [
@@ -28,6 +29,9 @@
     zoomFontWhenCtrlScrolling: false
   "exception-reporting":
     userId: "83917c78-9c35-f970-8767-722c39816fca"
+  "linter-javac":
+    additionalClasspaths: "bin/"
+    additionalJavacOptions: "-sourcepath src/ -d bin"
   "linter-js-standard":
     showEslintRules: true
   "one-dark-ui": {}
