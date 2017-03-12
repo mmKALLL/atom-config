@@ -1,3 +1,73 @@
+<a name="3.10.0"></a>
+# [3.10.0](https://github.com/Adezandee/fast-eslint/compare/v3.9.0...v3.10.0) (2017-02-04)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.15.0 ([8c1101a](https://github.com/Adezandee/fast-eslint/commit/8c1101a))
+
+
+
+<a name="3.9.0"></a>
+# [3.9.0](https://github.com/Adezandee/fast-eslint/compare/v3.8.0...v3.9.0) (2017-01-06)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.13.0 ([2b712f8](https://github.com/Adezandee/fast-eslint/commit/2b712f8))
+
+
+
+<a name="3.8.0"></a>
+# [3.8.0](https://github.com/Adezandee/fast-eslint/compare/v3.7.0...v3.8.0) (2016-12-01)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.11.1 ([53c39c6](https://github.com/Adezandee/fast-eslint/commit/53c39c6))
+
+
+
+<a name="3.7.0"></a>
+# [3.7.0](https://github.com/Adezandee/fast-eslint/compare/v3.6.0...v3.7.0) (2016-11-13)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.10.0 ([30b71ec](https://github.com/Adezandee/fast-eslint/commit/30b71ec))
+
+
+
+<a name="3.6.0"></a>
+# [3.6.0](https://github.com/Adezandee/fast-eslint/compare/v3.5.1...v3.6.0) (2016-11-02)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.9.1 ([1067dc6](https://github.com/Adezandee/fast-eslint/commit/1067dc6))
+
+
+
+<a name="3.5.1"></a>
+## [3.5.1](https://github.com/Adezandee/fast-eslint/compare/v3.5.0...v3.5.1) (2016-10-28)
+
+
+### Bug Fixes
+
+* **errors:** change how config errors are displayed ([4e91153](https://github.com/Adezandee/fast-eslint/commit/4e91153)), closes [#166](https://github.com/Adezandee/fast-eslint/issues/166)
+
+
+
+<a name="3.5.0"></a>
+# [3.5.0](https://github.com/Adezandee/fast-eslint/compare/v3.4.0...v3.5.0) (2016-10-18)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.8.1 ([0720076](https://github.com/Adezandee/fast-eslint/commit/0720076))
+
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/Adezandee/fast-eslint/compare/v3.3.0...v3.4.0) (2016-10-03)
 

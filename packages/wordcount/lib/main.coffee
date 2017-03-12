@@ -60,25 +60,58 @@ module.exports =
       type: 'boolean'
       default: false
       order: 8
+    showprice:
+      title: 'Do you get paid per word?'
+      description: 'Shows the price for the text per word'
+      type: 'boolean'
+      default: false
+      order: 9
+    wordprice:
+      title: 'How much do you get paid per word?'
+      description: 'Allows you to find out how much do you get paid per word'
+      type: 'string'
+      default: '0.15'
+      order: 10
+    currencysymbol:
+      title: 'Set a different currency symbol'
+      description: 'Allows you to change the currency you get paid with'
+      type: 'string'
+      default: '$'
+      order: 11
 
   activate: (state) ->
+    @visible = false
     view = new WordcountView()
+
+    # Updates only the count of the s
+    update_count = _.throttle (editor) =>
+      @visible && view.update_count(editor)
+    , 300
+
+    # Update count when content of buffer or selections change
     atom.workspace.observeTextEditors (editor) ->
-      update_count = _.throttle ->
-        view.update_count(editor)
-      , 300
-      editor.onDidChange update_count
-      editor.onDidChangeSelectionRange update_count
+      editor.onDidChange -> update_count editor
 
-    atom.workspace.onDidChangeActivePaneItem @show_or_hide_for_item
+      # NOTE: This triggers before a didChangeActivePane, so the counts might be calculated once on pane switch
+      editor.onDidChangeSelectionRange -> update_count editor
 
-    @show_or_hide_for_item atom.workspace.getActivePaneItem()
+    # Updates the visibility and count of the view
+    update_view_and_count = (item) =>
+      @show_or_hide_for_item item
+      editor = atom.workspace.getActiveTextEditor()
+      update_count editor if editor?
+
+    # Update whenever active item changes
+    atom.workspace.onDidChangeActivePaneItem update_view_and_count
+
+    # Initial update
+    update_view_and_count atom.workspace.getActivePaneItem()
 
     atom.config.observe('wordcount.goal', @update_goal)
 
   update_goal: (item) ->
     if item is 0
-      view.css('background', 'transparent')
+      view.element.style.background = 'transparent'
 
   show_or_hide_for_item: (item) ->
     {alwaysOn, extensions, noextension} = atom.config.get('wordcount')
@@ -89,16 +122,17 @@ module.exports =
     untitled_tab = buffer?.file is null
     current_file_extension = buffer?.file?.path.match(/\.(\w+)$/)?[1].toLowerCase()
 
-    if noextension and (not current_file_extension? or untitled_tab)
-      no_extension = true
+    no_extension = noextension and (not current_file_extension? or untitled_tab)
 
     if alwaysOn or no_extension or current_file_extension in extensions
-      view.css("display", "inline-block") unless not_text_editor
+      @visible = true
+      view.element.style.display = "inline-block" unless not_text_editor
     else
-      view.css("display", "none")
+      @visible = false
+      view.element.style.display = "none"
 
   consumeStatusBar: (statusBar) ->
-    tile = statusBar.addRightTile(item: view, priority: 100)
+    tile = statusBar.addRightTile(item: view.element, priority: 100)
 
   deactivate: ->
     tile?.destroy()

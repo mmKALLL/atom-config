@@ -7,8 +7,8 @@ module.exports = {
   config: {
     style: {
       type: 'string',
-      default: 'standard',
-      enum: ['standard', 'semi-standard', 'happiness', 'uber-standard']
+      default: styleSettings.defaultStyle,
+      enum: styleSettings.styleOptions
     },
     checkStyleDevDependencies: {
       type: 'boolean',
@@ -30,11 +30,16 @@ module.exports = {
       type: 'boolean',
       description: 'Lint markdown fenced code blocks',
       default: false
+    },
+    lintHtmlFiles: {
+      type: 'boolean',
+      description: 'Lint html-embedded script blocks',
+      default: false
     }
   },
   cache: new Map(),
   subscriptions: {},
-  scope: ['source.js', 'source.js.jsx', 'source.js.jquery', 'source.gfm'],
+  scope: ['source.js', 'source.js.jsx', 'source.js.jquery', 'source.gfm', 'source.vue'],
   activate: function () {
     var self = this
 
@@ -56,6 +61,16 @@ module.exports = {
 
         // Check if this file is inside our grammar scope
         var grammar = paneItem.getGrammar() || { scopeName: null }
+
+        // Check if this file is inside any kind of html scope (such as text.html.basic among others)
+        if (config.lintHtmlFiles && /^text.html/.test(grammar.scopeName) && self.scope.indexOf(grammar.scopeName) < 0) {
+          self.scope.push(grammar.scopeName)
+        }
+
+        if (!config.lintHtmlFiles && /^text.html/.test(grammar.scopeName)) {
+          return
+        }
+
         if (self.scope.indexOf(grammar.scopeName) < 0 || (!config.lintMarkdownFiles && grammar.scopeName === 'source.gfm')) {
           return
         }
@@ -89,17 +104,13 @@ module.exports = {
 
   __cacheTextEditor: function (config, textEditor) {
     var filePath = textEditor.getPath()
-    var style = selectStyle(config, filePath)
-    var opts = {}
 
-    // If setting honorStyleSettings is checked
-    // and there is a valid linter
-    if (config.honorStyleSettings && style && style.cmd !== 'no-style') {
-      // This function may modify the following variables:
-      // - opts
-      // - style
-      styleSettings.call({ args: opts, style: style }, filePath)
-    }
+    var opts = config.honorStyleSettings ? styleSettings.checkStyleSettings(filePath) : {}
+
+    var style = selectStyle(filePath, {
+      style: opts.style || config.style,
+      checkStyleDevDependencies: config.checkStyleDevDependencies
+    })
 
     // Cache style settings and args of some file
     this.cache.set('text-editor', { style: style, opts: opts })

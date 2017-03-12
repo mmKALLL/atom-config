@@ -34,15 +34,11 @@
 '*':
   'ctrl-t': 'application:new-file'
   'alt-shift-s': 'core:save-all'
-  'ctrl-alt-\\': 'unset!'
   'ctrl-alt-\\': 'core:\\'
 
 'body':
-  'ctrl-tab ^ctrl': 'unset!'
   'ctrl-tab': 'pane:show-next-item'
-  'ctrl-shift-tab ^ctrl': 'unset!'
   'ctrl-shift-tab': 'pane:show-previous-item'
-  'alt-right': 'unset!'
   'alt-right': 'editor:move-to-end-of-screen-line'
   'alt-left': 'editor:move-to-first-character-of-line'
 
@@ -50,9 +46,7 @@
   '>': 'autoclose-html:close-and-complete'
 
 'body atom-text-editor.autocomplete-active':
-  'tab': 'unset!'
   'tab': 'autocomplete-plus:move-down'
-  'shift-tab': 'unset!'
   'shift-tab': 'autocomplete-plus:move-up'
   'pageup': 'autocomplete-plus:move-up'
   'pagedown': 'autocomplete-plus:move-down'

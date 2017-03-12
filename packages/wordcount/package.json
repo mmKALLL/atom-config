@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
-        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
         "type": "local"
       },
-      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-116912-464-1m77b1k"
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117124-5648-khpvc1"
     ]
   ],
-  "_from": "..\\d-116912-464-cbm1au\\package.tgz",
-  "_id": "wordcount@2.7.0",
+  "_from": "..\\d-117124-5648-10d8eid\\package.tgz",
+  "_id": "wordcount@2.10.4",
   "_inCache": true,
   "_installable": true,
   "_location": "/wordcount",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
-    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:..\\d-116912-464-cbm1au\\package.tgz",
-  "_shasum": "5bfc4c9d9a39935e959069d4e328af26ea5fe3b7",
+  "_resolved": "file:..\\d-117124-5648-10d8eid\\package.tgz",
+  "_shasum": "ffb2505806c0b1429a012913097c5d77d2a1ea1a",
   "_shrinkwrap": null,
-  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116912-464-cbm1au\\package.tgz",
-  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-116912-464-1m77b1k",
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-5648-10d8eid\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117124-5648-khpvc1",
   "bugs": {
     "url": "https://github.com/nesQuick/atom-wordcount/issues"
   },
@@ -47,10 +47,9 @@
     }
   },
   "dependencies": {
-    "atom-space-pen-views": "^2.0.3",
     "lodash": "^3.10.1"
   },
-  "description": "Counts the words (and characters) in your current document, as well as in your selection and displays it in the status bar.",
+  "description": "Counts the words (and characters) in your current document, as well as in your selections and displays it in the status bar.",
   "devDependencies": {},
   "engines": {
     "atom": ">=0.180.0"
@@ -71,11 +70,11 @@
   "main": "./lib/main",
   "name": "wordcount",
   "optionalDependencies": {},
-  "readme": "# Atom wordcount package\n\nCounts the words and characters in your current document and displays them in the status bar. Plus a handful of great features, like:\n\n  - Actives automatically on text files (define on which file extensions you want to activate it, or turn it \"Always on\")\n  - Supports counting in your current selection\n  - Writing goal tracker (with custom colors support)\n  - Works with unsaved files\n  - Option to exclude `codeblocks` from count\n\n\n![A screenshot of your spankin' package](https://cloud.githubusercontent.com/assets/584259/19187373/62f97ad8-8c8b-11e6-85aa-1282f94f509b.gif))\n\n*A special thanks goes to our [awesome contributors](https://github.com/nesQuick/atom-wordcount/graphs/contributors) 👏*\n",
+  "readme": "# Atom wordcount package\n\nCounts the words and characters in your current document and displays them in the status bar. Plus a handful of great features, like:\n\n  - Activates automatically on text files (define on which file extensions you want to activate it, or turn it \"Always on\")\n  - Counts the words and characters in your selection when you have made one (or multiple!)\n  - Writing goal tracker (with custom colors support)\n  - Works with unsaved files\n  - Option to exclude `codeblocks` from count\n  - Option to show the total price per word for the document. Currency symbol can be changed in Settings.\n\n\n![A screenshot of your spankin' package](https://cloud.githubusercontent.com/assets/584259/19187373/62f97ad8-8c8b-11e6-85aa-1282f94f509b.gif))\n\n*A special thanks goes to our [awesome contributors](https://github.com/nesQuick/atom-wordcount/graphs/contributors) 👏*\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nesQuick/atom-wordcount.git"
   },
-  "version": "2.7.0"
+  "version": "2.10.4"
 }

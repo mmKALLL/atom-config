@@ -2,46 +2,50 @@
   "_args": [
     [
       {
-        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
-        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
         "type": "local"
       },
-      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-116825-8336-qh3dji"
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117124-9296-1ries9a"
     ]
   ],
-  "_from": "..\\d-116825-8336-a48njl\\package.tgz",
-  "_id": "atom-monokai@0.10.4",
+  "_from": "..\\d-117124-9296-1p0w5vw\\package.tgz",
+  "_id": "atom-monokai@0.10.8",
   "_inCache": true,
   "_installable": true,
   "_location": "/atom-monokai",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
-    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:..\\d-116825-8336-a48njl\\package.tgz",
-  "_shasum": "6a1e71bbe727bcfe9084bb157a36a05f99940225",
+  "_resolved": "file:..\\d-117124-9296-1p0w5vw\\package.tgz",
+  "_shasum": "cae10ae0ba20d85737854ba0da5157697a488c14",
   "_shrinkwrap": null,
-  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-116825-8336-a48njl\\package.tgz",
-  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-116825-8336-qh3dji",
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117124-9296-1p0w5vw\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117124-9296-1ries9a",
   "bugs": {
     "url": "https://github.com/burntime/atom-monokai/issues"
   },
   "dependencies": {},
   "description": "Monokai syntax theme for Atom Dark, One Dark, Seti UI and other",
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-stylelint": "^3.8.0",
+    "stylelint-config-primer": "^1.4.0"
+  },
   "dist": {
     "shasum": "4cd9c25def7cd564111f923a3c8e817175abdf4c"
   },
@@ -65,6 +69,10 @@
     "type": "git",
     "url": "git+https://github.com/burntime/atom-monokai.git"
   },
+  "scripts": {
+    "gulp": "gulp",
+    "test": "npm run gulp -- test"
+  },
   "theme": "syntax",
-  "version": "0.10.4"
+  "version": "0.10.8"
 }
