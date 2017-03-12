@@ -33,6 +33,7 @@
 
 '*':
   'ctrl-t': 'application:new-file'
+  'alt-shift-s': 'core:save-all'
 
 'body':
   'ctrl-tab ^ctrl': 'unset!'
