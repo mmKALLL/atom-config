@@ -1,4 +1,6 @@
 "*":
+  "atom-package-deps":
+    ignored: []
   "autoclose-html": {}
   "autocomplete-plus":
     confirmCompletion: "enter"
@@ -8,20 +10,22 @@
     allowPendingPaneItems: false
     automaticallyUpdate: false
     disabledPackages: [
-      "linter-js-standard"
-      "fast-eslint"
-      "linter-eslint"
       "linter-javac"
+      "project-manager"
+      "fast-eslint"
+      "linter-js-standard"
     ]
     openEmptyEditorOnStart: false
     packagesWithKeymapsDisabled: [
       "autoclose-html"
     ]
+    projectHome: "C:\\Users\\admin\\Desktop\\documents\\projects"
     telemetryConsent: "no"
     themes: [
       "atom-dark-ui"
       "atom-dark-syntax"
     ]
+    warnOnLargeFileLimit: 2
   editor:
     backUpBeforeSaving: true
     scrollPastEnd: true
@@ -34,6 +38,8 @@
     additionalJavacOptions: "-sourcepath src/ -d bin"
   "linter-js-standard":
     showEslintRules: true
+  "linter-ui-default":
+    showPanel: true
   "one-dark-ui": {}
   "tree-view":
     hideVcsIgnoredFiles: true

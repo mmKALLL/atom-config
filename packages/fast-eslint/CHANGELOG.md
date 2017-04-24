@@ -1,3 +1,29 @@
+<a name="3.13.0"></a>
+# [3.13.0](https://github.com/Adezandee/fast-eslint/compare/v3.12.0...v3.13.0) (2017-04-05)
+
+
+### Features
+
+* **eslint:** update eslint to version 3.19.0 ([36fa262](https://github.com/Adezandee/fast-eslint/commit/36fa262))
+
+
+
+<a name="3.12.0"></a>
+# [3.12.0](https://github.com/Adezandee/fast-eslint/compare/v3.11.0...v3.12.0) (2017-03-26)
+
+
+### Bug Fixes
+
+* **linter:** allow empty ruleId as fatal ([efe5347](https://github.com/Adezandee/fast-eslint/commit/efe5347))
+
+
+### Features
+
+* **eslint:** update eslint to version 3.18.0 ([8d2a4bf](https://github.com/Adezandee/fast-eslint/commit/8d2a4bf))
+* **linter:** upgrade to linter API v2. Add solution from eslint fix ([1458e91](https://github.com/Adezandee/fast-eslint/commit/1458e91))
+
+
+
 <a name="3.11.0"></a>
 # [3.11.0](https://github.com/Adezandee/fast-eslint/compare/v3.10.0...v3.11.0) (2017-03-06)
 

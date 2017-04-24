@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
-        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
         "type": "local"
       },
-      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117212-4384-1epw791"
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117322-8516-wrpn8z"
     ]
   ],
-  "_from": "..\\d-117212-4384-3vxfbh\\package.tgz",
-  "_id": "linter-eslint@8.1.3",
+  "_from": "..\\d-117322-8516-oqgq1m\\package.tgz",
+  "_id": "linter-eslint@8.1.6",
   "_inCache": true,
   "_installable": true,
   "_location": "/linter-eslint",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
-    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:..\\d-117212-4384-3vxfbh\\package.tgz",
-  "_shasum": "1dc5fc5c658c9ad1949b26f8709879f222b37036",
+  "_resolved": "file:..\\d-117322-8516-oqgq1m\\package.tgz",
+  "_shasum": "86c1f2c0c94b772c948c77919d6474035c5a607c",
   "_shrinkwrap": null,
-  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117212-4384-3vxfbh\\package.tgz",
-  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117212-4384-1epw791",
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-8516-oqgq1m\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117322-8516-wrpn8z",
   "bugs": {
     "url": "https://github.com/AtomLinter/linter-eslint/issues"
   },
@@ -154,6 +154,7 @@
     "eslint": "^3.17.0",
     "eslint-config-airbnb-base": "^11.0.0",
     "eslint-plugin-import": "^2.2.0",
+    "jasmine-fix": "^1.0.1",
     "rimraf": "^2.5.4"
   },
   "engines": {
@@ -190,7 +191,8 @@
       "atom": "true"
     },
     "env": {
-      "node": true
+      "node": true,
+      "browser": true
     }
   },
   "homepage": "https://github.com/AtomLinter/linter-eslint#readme",
@@ -221,5 +223,5 @@
     "test": "apm test",
     "watch": "npm run compile -- -w"
   },
-  "version": "8.1.3"
+  "version": "8.1.6"
 }
