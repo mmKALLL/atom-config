@@ -6,7 +6,6 @@
 import path from 'path';
 import module from 'module';
 import childProcess from 'child_process';
-import uniq from 'lodash.uniq';
 import CLIEngine from 'eslint/lib/cli-engine';
 import IgnoredPaths from 'eslint/lib/ignored-paths';
 import { allowUnsafeNewFunction } from 'loophole';
@@ -15,7 +14,6 @@ import { allowUnsafeNewFunction } from 'loophole';
 * Private
 */
 let engine;
-let linting = false;
 
 const toModulePaths = projectPaths => (
   projectPaths.reduce((accumulator, projectPath) => (
@@ -36,15 +34,15 @@ childProcess.exec('npm config get prefix', (error, stdout) => {
 * Atom currently opened projects module paths
 */
 let atomProjectsPaths = toModulePaths(atom.project.rootDirectories.map(project => project.path));
-atom.project.onDidChangePaths(projectPaths => (atomProjectsPaths = toModulePaths(projectPaths)));
+atom.project.onDidChangePaths((projectPaths) => { atomProjectsPaths = toModulePaths(projectPaths); });
 
 /**
 * ESLint ModuleResolver & require() patch with AtomProjectsPaths and NodeLibPath
 */
 const oldFindPath = module._findPath;
 module._findPath = (name, lookupPaths) => {
-  if (linting && lookupPaths.length > 1) {
-    lookupPaths = uniq([...lookupPaths, ...atomProjectsPaths, nodeLibPath]);
+  if (lookupPaths.length > 1) {
+    lookupPaths = lookupPaths.concat(atomProjectsPaths, nodeLibPath);
   }
   return oldFindPath.call(this, name, lookupPaths);
 };
@@ -62,13 +60,14 @@ export function initEngine(presets) {
   const baseConfig = (presets.length === 0) ? false : {
     extends: presets,
   };
-  engine = new CLIEngine({ baseConfig });
+  allowUnsafeNewFunction(() => {
+    engine = new CLIEngine({ baseConfig });
+  });
 }
 
 export function exec(filePath, fileText) {
   return new Promise((resolve) => {
     try {
-      linting = true;
       allowUnsafeNewFunction(() => {
         resolve(engine.executeOnText(fileText, filePath));
       });
@@ -76,8 +75,6 @@ export function exec(filePath, fileText) {
       // Rather than displaying a big error, treat the error as a normal lint error so it shows
       // in the footer rather than a pop-up toast error message.
       resolve({ results: [{ messages: [{ line: 1, message: error, ruleId: NaN, severity: 2 }] }] });
-    } finally {
-      linting = false;
     }
   });
 }

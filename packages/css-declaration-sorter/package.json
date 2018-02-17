@@ -1,0 +1,577 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+        "type": "local"
+      },
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118112-14300-qushkl.fihir7ldi"
+    ]
+  ],
+  "_from": "..\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+  "_id": "css-declaration-sorter@1.2.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/css-declaration-sorter",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:..\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+  "_shasum": "dd291cf7c276d4d6841e0387e3f301dd5004c07d",
+  "_shrinkwrap": null,
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-14300-1dkvw5f.607j8m2t9\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118112-14300-qushkl.fihir7ldi",
+  "author": {
+    "name": "Selwyn",
+    "email": "talk@selwyn.cc",
+    "url": "https://selwyn.cc/"
+  },
+  "bugs": {
+    "url": "https://github.com/Siilwyn/css-declaration-sorter-atom/issues"
+  },
+  "dependencies": {
+    "css-declaration-sorter": "^3.0.0",
+    "import-lazy": "^3.1.0",
+    "postcss": "^6.0.0",
+    "postcss-less": "^1.1.0",
+    "postcss-scss": "^1.0.0"
+  },
+  "description": "Sorts CSS declarations fast and automatically in a certain order.",
+  "devDependencies": {
+    "eslint": "^4.0.0"
+  },
+  "engines": {
+    "atom": ">=1.5.0 <2.0.0"
+  },
+  "files": [
+    "keymaps",
+    "lib",
+    "menus"
+  ],
+  "homepage": "https://github.com/Siilwyn/css-declaration-sorter-atom#readme",
+  "keywords": [
+    "postcss",
+    "css",
+    "declaration",
+    "sorter",
+    "property",
+    "order"
+  ],
+  "license": "MIT",
+  "main": "./lib/css-declaration-sorter",
+  "name": "css-declaration-sorter",
+  "optionalDependencies": {},
+  "readme": "# CSS Declaration Sorter Package\n[![Travis Build Status][travis-icon]][travis]\n[![David Dependencies Status][david-icon]][david]\n[![David devDependencies Status][david-dev-icon]][david-dev]\n\nSorts your CSS declarations, or Less and SCSS, in Atom, never gets tired. If you want to define a sort order project-wide check out the [css-declaration-sorter](https://github.com/Siilwyn/css-declaration-sorter#readme) Node.js module.\n\n![show-off](https://raw.githubusercontent.com/Siilwyn/css-declaration-sorter-atom/master/show-off.gif)\n\n## Commands and Keybindings\nAll of the following commands are under the `atom-text-editor[data-grammar~='css']` selector.\n\n|Command|Description|\n|-------|-----------|\n|`css-declaration-sorter:sort`|Sorts according to configured order in the settings|\n|`css-declaration-sorter:sort-alphabetically`|Sorts alphabetically|\n|`css-declaration-sorter:sort-smacss`|Sorts according to [SMACSS](https://smacss.com/book/formatting#grouping)|\n|`css-declaration-sorter:sort-concentric-css`|Sorts according to [Concentric CSS](https://github.com/brandon-rhodes/Concentric-CSS)|\n\nBy default `css-declaration-sorter:sort` is mapped to `ctrl-alt-c`. You may want to use keyboard shortcuts for triggering the other commands. You can easily [define your own](http://flight-manual.atom.io/using-atom/sections/basic-customization/#_customizing_keybindings).\n\n[travis]: https://travis-ci.org/Siilwyn/css-declaration-sorter-atom\n[travis-icon]: https://img.shields.io/travis/Siilwyn/css-declaration-sorter-atom/master.svg?style=flat-square\n[david]: https://david-dm.org/Siilwyn/css-declaration-sorter-atom\n[david-icon]: https://img.shields.io/david/Siilwyn/css-declaration-sorter-atom.svg?style=flat-square\n[david-dev]: https://david-dm.org/Siilwyn/css-declaration-sorter-atom#info=devDependencies\n[david-dev-icon]: https://img.shields.io/david/dev/Siilwyn/css-declaration-sorter-atom.svg?style=flat-square\n",
+  "readmeFilename": "readme.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Siilwyn/css-declaration-sorter-atom.git"
+  },
+  "scripts": {
+    "lint": "eslint lib/*.js spec/*.js",
+    "start": "atom .",
+    "test": "atom --test ./spec/main-spec.js"
+  },
+  "version": "1.2.0",
+  "_atomModuleCache": {
+    "version": 1,
+    "dependencies": [
+      {
+        "name": "ansi-regex",
+        "version": "2.1.1",
+        "path": "node_modules\\ansi-regex\\index.js"
+      },
+      {
+        "name": "ansi-styles",
+        "version": "3.2.0",
+        "path": "node_modules\\ansi-styles\\index.js"
+      },
+      {
+        "name": "chalk",
+        "version": "2.3.1",
+        "path": "node_modules\\chalk\\index.js"
+      },
+      {
+        "name": "color-convert",
+        "version": "1.9.1",
+        "path": "node_modules\\color-convert\\index.js"
+      },
+      {
+        "name": "color-name",
+        "version": "1.1.3",
+        "path": "node_modules\\color-name\\index.js"
+      },
+      {
+        "name": "css-declaration-sorter",
+        "version": "3.0.1",
+        "path": "node_modules\\css-declaration-sorter\\src\\index.js"
+      },
+      {
+        "name": "escape-string-regexp",
+        "version": "1.0.5",
+        "path": "node_modules\\escape-string-regexp\\index.js"
+      },
+      {
+        "name": "has-ansi",
+        "version": "2.0.0",
+        "path": "node_modules\\has-ansi\\index.js"
+      },
+      {
+        "name": "has-flag",
+        "version": "3.0.0",
+        "path": "node_modules\\has-flag\\index.js"
+      },
+      {
+        "name": "import-lazy",
+        "version": "3.1.0",
+        "path": "node_modules\\import-lazy\\index.js"
+      },
+      {
+        "name": "js-base64",
+        "version": "2.4.3",
+        "path": "node_modules\\js-base64\\base64.js"
+      },
+      {
+        "name": "postcss",
+        "version": "6.0.17",
+        "path": "node_modules\\postcss\\lib\\postcss.js"
+      },
+      {
+        "name": "postcss-less",
+        "version": "1.1.3",
+        "path": "node_modules\\postcss-less\\dist\\less-syntax.js"
+      },
+      {
+        "name": "ansi-styles",
+        "version": "2.2.1",
+        "path": "node_modules\\postcss-less\\node_modules\\ansi-styles\\index.js"
+      },
+      {
+        "name": "chalk",
+        "version": "1.1.3",
+        "path": "node_modules\\postcss-less\\node_modules\\chalk\\index.js"
+      },
+      {
+        "name": "supports-color",
+        "version": "2.0.0",
+        "path": "node_modules\\postcss-less\\node_modules\\chalk\\node_modules\\supports-color\\index.js"
+      },
+      {
+        "name": "has-flag",
+        "version": "1.0.0",
+        "path": "node_modules\\postcss-less\\node_modules\\has-flag\\index.js"
+      },
+      {
+        "name": "postcss",
+        "version": "5.2.18",
+        "path": "node_modules\\postcss-less\\node_modules\\postcss\\lib\\postcss.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.5.7",
+        "path": "node_modules\\postcss-less\\node_modules\\source-map\\source-map.js"
+      },
+      {
+        "name": "supports-color",
+        "version": "3.2.3",
+        "path": "node_modules\\postcss-less\\node_modules\\supports-color\\index.js"
+      },
+      {
+        "name": "postcss-scss",
+        "version": "1.0.3",
+        "path": "node_modules\\postcss-scss\\lib\\scss-syntax.js"
+      },
+      {
+        "name": "source-map",
+        "version": "0.6.1",
+        "path": "node_modules\\source-map\\source-map.js"
+      },
+      {
+        "name": "strip-ansi",
+        "version": "3.0.1",
+        "path": "node_modules\\strip-ansi\\index.js"
+      },
+      {
+        "name": "supports-color",
+        "version": "5.2.0",
+        "path": "node_modules\\supports-color\\index.js"
+      },
+      {
+        "name": "timsort",
+        "version": "0.3.0",
+        "path": "node_modules\\timsort\\index.js"
+      }
+    ],
+    "extensions": {
+      ".js": [
+        "lib\\css-declaration-sorter.js",
+        "node_modules\\ansi-regex\\index.js",
+        "node_modules\\ansi-styles\\index.js",
+        "node_modules\\chalk\\index.js",
+        "node_modules\\chalk\\templates.js",
+        "node_modules\\color-convert\\conversions.js",
+        "node_modules\\color-convert\\index.js",
+        "node_modules\\color-convert\\route.js",
+        "node_modules\\color-name\\index.js",
+        "node_modules\\color-name\\test.js",
+        "node_modules\\css-declaration-sorter\\src\\index.js",
+        "node_modules\\escape-string-regexp\\index.js",
+        "node_modules\\has-ansi\\index.js",
+        "node_modules\\has-flag\\index.js",
+        "node_modules\\import-lazy\\index.js",
+        "node_modules\\js-base64\\base64.js",
+        "node_modules\\js-base64\\base64.min.js",
+        "node_modules\\js-base64\\old\\base64-1.7.js",
+        "node_modules\\js-base64\\package.js",
+        "node_modules\\js-base64\\test-moment\\dankogai.js",
+        "node_modules\\js-base64\\test-moment\\es5.js",
+        "node_modules\\js-base64\\test-moment\\es6.js",
+        "node_modules\\js-base64\\test-moment\\large.js",
+        "node_modules\\js-base64\\test-moment\\moment.js",
+        "node_modules\\js-base64\\test-moment\\yoshinoya.js",
+        "node_modules\\postcss\\gulpfile.js",
+        "node_modules\\postcss\\lib\\at-rule.js",
+        "node_modules\\postcss\\lib\\comment.js",
+        "node_modules\\postcss\\lib\\container.js",
+        "node_modules\\postcss\\lib\\css-syntax-error.js",
+        "node_modules\\postcss\\lib\\declaration.js",
+        "node_modules\\postcss\\lib\\input.js",
+        "node_modules\\postcss\\lib\\lazy-result.js",
+        "node_modules\\postcss\\lib\\list.js",
+        "node_modules\\postcss\\lib\\map-generator.js",
+        "node_modules\\postcss\\lib\\node.js",
+        "node_modules\\postcss\\lib\\parse.js",
+        "node_modules\\postcss\\lib\\parser.js",
+        "node_modules\\postcss\\lib\\postcss.js",
+        "node_modules\\postcss\\lib\\previous-map.js",
+        "node_modules\\postcss\\lib\\processor.js",
+        "node_modules\\postcss\\lib\\result.js",
+        "node_modules\\postcss\\lib\\root.js",
+        "node_modules\\postcss\\lib\\rule.js",
+        "node_modules\\postcss\\lib\\stringifier.js",
+        "node_modules\\postcss\\lib\\stringify.js",
+        "node_modules\\postcss\\lib\\terminal-highlight.js",
+        "node_modules\\postcss\\lib\\tokenize.js",
+        "node_modules\\postcss\\lib\\vendor.js",
+        "node_modules\\postcss\\lib\\warn-once.js",
+        "node_modules\\postcss\\lib\\warning.js",
+        "node_modules\\postcss-less\\dist\\find-extend-rule.js",
+        "node_modules\\postcss-less\\dist\\find-extend-rule.min.js",
+        "node_modules\\postcss-less\\dist\\import.js",
+        "node_modules\\postcss-less\\dist\\import.min.js",
+        "node_modules\\postcss-less\\dist\\is-mixin-token.js",
+        "node_modules\\postcss-less\\dist\\is-mixin-token.min.js",
+        "node_modules\\postcss-less\\dist\\less-parse.js",
+        "node_modules\\postcss-less\\dist\\less-parse.min.js",
+        "node_modules\\postcss-less\\dist\\less-parser.js",
+        "node_modules\\postcss-less\\dist\\less-parser.min.js",
+        "node_modules\\postcss-less\\dist\\less-stringifier.js",
+        "node_modules\\postcss-less\\dist\\less-stringifier.min.js",
+        "node_modules\\postcss-less\\dist\\less-stringify.js",
+        "node_modules\\postcss-less\\dist\\less-stringify.min.js",
+        "node_modules\\postcss-less\\dist\\less-syntax.js",
+        "node_modules\\postcss-less\\dist\\less-syntax.min.js",
+        "node_modules\\postcss-less\\dist\\less-tokenize.js",
+        "node_modules\\postcss-less\\dist\\less-tokenize.min.js",
+        "node_modules\\postcss-less\\dist\\root.js",
+        "node_modules\\postcss-less\\dist\\root.min.js",
+        "node_modules\\postcss-less\\dist\\rule.js",
+        "node_modules\\postcss-less\\dist\\rule.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\find-end-of-escaping.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\find-end-of-escaping.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\find-end-of-expression.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\find-end-of-expression.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\globals.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\globals.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\is-escaping.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\is-escaping.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-at-rule.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-at-rule.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-backslash.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-backslash.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-basic-symbol.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-basic-symbol.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-comma.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-comma.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-default.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-default.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-inline-comment.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-inline-comment.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-multiline-comment.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-multiline-comment.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-opened-parenthesis.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-opened-parenthesis.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-quotes.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-quotes.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-symbol.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-symbol.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-whitespace.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\tokenize-whitespace.min.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\unclosed.js",
+        "node_modules\\postcss-less\\dist\\tokenizer\\unclosed.min.js",
+        "node_modules\\postcss-less\\node_modules\\ansi-styles\\index.js",
+        "node_modules\\postcss-less\\node_modules\\chalk\\index.js",
+        "node_modules\\postcss-less\\node_modules\\chalk\\node_modules\\supports-color\\index.js",
+        "node_modules\\postcss-less\\node_modules\\has-flag\\index.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\at-rule.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\comment.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\container.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\css-syntax-error.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\declaration.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\input.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\lazy-result.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\list.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\map-generator.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\node.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\parse.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\parser.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\postcss.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\previous-map.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\processor.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\result.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\root.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\rule.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\stringifier.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\stringify.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\terminal-highlight.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\tokenize.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\vendor.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\warn-once.js",
+        "node_modules\\postcss-less\\node_modules\\postcss\\lib\\warning.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\dist\\source-map.debug.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\dist\\source-map.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\dist\\source-map.min.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\array-set.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\base64-vlq.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\base64.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\binary-search.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\mapping-list.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\quick-sort.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\source-map-consumer.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\source-map-generator.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\source-node.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\lib\\util.js",
+        "node_modules\\postcss-less\\node_modules\\source-map\\source-map.js",
+        "node_modules\\postcss-less\\node_modules\\supports-color\\browser.js",
+        "node_modules\\postcss-less\\node_modules\\supports-color\\index.js",
+        "node_modules\\postcss-scss\\lib\\nested-declaration.js",
+        "node_modules\\postcss-scss\\lib\\scss-parse.js",
+        "node_modules\\postcss-scss\\lib\\scss-parser.js",
+        "node_modules\\postcss-scss\\lib\\scss-stringifier.js",
+        "node_modules\\postcss-scss\\lib\\scss-stringify.js",
+        "node_modules\\postcss-scss\\lib\\scss-syntax.js",
+        "node_modules\\postcss-scss\\lib\\scss-tokenize.js",
+        "node_modules\\source-map\\dist\\source-map.debug.js",
+        "node_modules\\source-map\\dist\\source-map.js",
+        "node_modules\\source-map\\dist\\source-map.min.js",
+        "node_modules\\source-map\\lib\\array-set.js",
+        "node_modules\\source-map\\lib\\base64-vlq.js",
+        "node_modules\\source-map\\lib\\base64.js",
+        "node_modules\\source-map\\lib\\binary-search.js",
+        "node_modules\\source-map\\lib\\mapping-list.js",
+        "node_modules\\source-map\\lib\\quick-sort.js",
+        "node_modules\\source-map\\lib\\source-map-consumer.js",
+        "node_modules\\source-map\\lib\\source-map-generator.js",
+        "node_modules\\source-map\\lib\\source-node.js",
+        "node_modules\\source-map\\lib\\util.js",
+        "node_modules\\source-map\\source-map.js",
+        "node_modules\\strip-ansi\\index.js",
+        "node_modules\\supports-color\\browser.js",
+        "node_modules\\supports-color\\index.js",
+        "node_modules\\timsort\\build\\timsort.js",
+        "node_modules\\timsort\\build\\timsort.min.js",
+        "node_modules\\timsort\\index.js",
+        "node_modules\\timsort\\src\\timsort.js"
+      ],
+      ".json": [
+        "node_modules\\ansi-regex\\package.json",
+        "node_modules\\ansi-styles\\package.json",
+        "node_modules\\chalk\\package.json",
+        "node_modules\\color-convert\\package.json",
+        "node_modules\\color-name\\.eslintrc.json",
+        "node_modules\\color-name\\package.json",
+        "node_modules\\css-declaration-sorter\\orders\\concentric-css.json",
+        "node_modules\\css-declaration-sorter\\orders\\smacss.json",
+        "node_modules\\css-declaration-sorter\\orders\\source.json",
+        "node_modules\\css-declaration-sorter\\package.json",
+        "node_modules\\escape-string-regexp\\package.json",
+        "node_modules\\has-ansi\\package.json",
+        "node_modules\\has-flag\\package.json",
+        "node_modules\\import-lazy\\package.json",
+        "node_modules\\js-base64\\bower.json",
+        "node_modules\\js-base64\\package.json",
+        "node_modules\\postcss\\package.json",
+        "node_modules\\postcss-less\\node_modules\\ansi-styles\\package.json",
+        "node_modules\\postcss-less\\node_modules\\chalk\\node_modules\\supports-color\\package.json",
+        "node_modules\\postcss-less\\node_modules\\chalk\\package.json",
+        "node_modules\\postcss-less\\node_modules\\has-flag\\package.json",
+        "node_modules\\postcss-less\\node_modules\\postcss\\package.json",
+        "node_modules\\postcss-less\\node_modules\\source-map\\package.json",
+        "node_modules\\postcss-less\\node_modules\\supports-color\\package.json",
+        "node_modules\\postcss-less\\package.json",
+        "node_modules\\postcss-scss\\package.json",
+        "node_modules\\source-map\\package.json",
+        "node_modules\\strip-ansi\\package.json",
+        "node_modules\\supports-color\\package.json",
+        "node_modules\\timsort\\package.json",
+        "package-lock.json",
+        "package.json",
+        "renovate.json"
+      ]
+    },
+    "folders": [
+      {
+        "paths": [
+          "lib",
+          "",
+          "spec"
+        ],
+        "dependencies": {
+          "css-declaration-sorter": "^3.0.0",
+          "import-lazy": "^3.1.0",
+          "postcss": "^6.0.0",
+          "postcss-less": "^1.1.0",
+          "postcss-scss": "^1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\ansi-styles"
+        ],
+        "dependencies": {
+          "color-convert": "^1.9.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\chalk"
+        ],
+        "dependencies": {
+          "ansi-styles": "^3.2.0",
+          "escape-string-regexp": "^1.0.5",
+          "supports-color": "^5.2.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\color-convert"
+        ],
+        "dependencies": {
+          "color-name": "^1.1.1"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\css-declaration-sorter\\orders",
+          "node_modules\\css-declaration-sorter",
+          "node_modules\\css-declaration-sorter\\src"
+        ],
+        "dependencies": {
+          "postcss": "^6.0.0",
+          "timsort": "^0.3.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\has-ansi"
+        ],
+        "dependencies": {
+          "ansi-regex": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss",
+          "node_modules\\postcss\\lib"
+        ],
+        "dependencies": {
+          "chalk": "^2.3.0",
+          "source-map": "^0.6.1",
+          "supports-color": "^5.1.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss-less\\dist",
+          "node_modules\\postcss-less\\dist\\tokenizer",
+          "node_modules\\postcss-less"
+        ],
+        "dependencies": {
+          "postcss": "^5.2.16"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss-less\\node_modules\\chalk"
+        ],
+        "dependencies": {
+          "ansi-styles": "^2.2.1",
+          "escape-string-regexp": "^1.0.2",
+          "has-ansi": "^2.0.0",
+          "strip-ansi": "^3.0.0",
+          "supports-color": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss-less\\node_modules\\postcss\\lib",
+          "node_modules\\postcss-less\\node_modules\\postcss"
+        ],
+        "dependencies": {
+          "chalk": "^1.1.3",
+          "js-base64": "^2.1.9",
+          "source-map": "^0.5.6",
+          "supports-color": "^3.2.3"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss-less\\node_modules\\supports-color"
+        ],
+        "dependencies": {
+          "has-flag": "^1.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\postcss-scss\\lib",
+          "node_modules\\postcss-scss"
+        ],
+        "dependencies": {
+          "postcss": "^6.0.15"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\strip-ansi"
+        ],
+        "dependencies": {
+          "ansi-regex": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\supports-color"
+        ],
+        "dependencies": {
+          "has-flag": "^3.0.0"
+        }
+      }
+    ]
+  }
+}

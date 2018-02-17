@@ -1,3 +1,118 @@
+<a name="4.8.0"></a>
+# [4.8.0](https://github.com/Adezandee/fast-eslint/compare/v4.7.0...v4.8.0) (2017-12-16)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.13.1 ([fc8a112](https://github.com/Adezandee/fast-eslint/commit/fc8a112))
+
+
+
+<a name="4.7.0"></a>
+# [4.7.0](https://github.com/Adezandee/fast-eslint/compare/v4.6.0...v4.7.0) (2017-10-28)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.10.0 ([9068a19](https://github.com/Adezandee/fast-eslint/commit/9068a19))
+
+
+
+<a name="4.6.0"></a>
+# [4.6.0](https://github.com/Adezandee/fast-eslint/compare/v4.5.0...v4.6.0) (2017-10-07)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.8.0 ([605fff1](https://github.com/Adezandee/fast-eslint/commit/605fff1))
+
+
+
+<a name="4.5.0"></a>
+# [4.5.0](https://github.com/Adezandee/fast-eslint/compare/v4.4.0...v4.5.0) (2017-09-17)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.7.0 ([889db28](https://github.com/Adezandee/fast-eslint/commit/889db28))
+
+
+
+<a name="4.4.0"></a>
+# [4.4.0](https://github.com/Adezandee/fast-eslint/compare/v4.3.0...v4.4.0) (2017-09-11)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.6.1 ([1bca61b](https://github.com/Adezandee/fast-eslint/commit/1bca61b))
+
+
+
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/Adezandee/fast-eslint/compare/v4.2.0...v4.3.0) (2017-08-25)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.5.0 ([cb448ee](https://github.com/Adezandee/fast-eslint/commit/cb448ee))
+
+
+
+<a name="4.2.0"></a>
+# [4.2.0](https://github.com/Adezandee/fast-eslint/compare/v4.1.0...v4.2.0) (2017-08-10)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.4.1 ([8c3c175](https://github.com/Adezandee/fast-eslint/commit/8c3c175))
+
+
+
+<a name="4.1.0"></a>
+# [4.1.0](https://github.com/Adezandee/fast-eslint/compare/v4.0.2...v4.1.0) (2017-07-10)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.2.0 ([81f9aa0](https://github.com/Adezandee/fast-eslint/commit/81f9aa0))
+
+
+
+<a name="4.0.2"></a>
+## [4.0.2](https://github.com/Adezandee/fast-eslint/compare/v4.0.1...v4.0.2) (2017-07-03)
+
+
+### Bug Fixes
+
+* **linter:** loophole ESLint engine init because of new dependency ([678c804](https://github.com/Adezandee/fast-eslint/commit/678c804))
+
+
+
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/Adezandee/fast-eslint/compare/v4.0.0...v4.0.1) (2017-07-03)
+
+
+### Bug Fixes
+
+* **linter:** inject custom lookup paths for engine init ([712c86e](https://github.com/Adezandee/fast-eslint/commit/712c86e))
+
+
+
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/Adezandee/fast-eslint/compare/v3.13.0...v4.0.0) (2017-07-03)
+
+
+### Features
+
+* **eslint:** update eslint to version 4.1.1 ([5da8801](https://github.com/Adezandee/fast-eslint/commit/5da8801))
+
+
+### BREAKING CHANGES
+
+* **eslint:** Upgraded to ESLint v4
+
+
+
 <a name="3.13.0"></a>
 # [3.13.0](https://github.com/Adezandee/fast-eslint/compare/v3.12.0...v3.13.0) (2017-04-05)
 

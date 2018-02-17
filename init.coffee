@@ -9,3 +9,7 @@
 # atom.workspace.observeTextEditors (editor) ->
 #   editor.onDidSave ->
 #     console.log "Saved! #{editor.getPath()}"
+
+atom.commands.add 'atom-text-editor',
+  'custom:insert-pipe': ->
+    atom.workspace.getActiveTextEditor()?.insertText('|')

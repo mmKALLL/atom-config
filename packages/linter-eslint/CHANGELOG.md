@@ -1,5 +1,85 @@
 # Changelog
 
+## v8.4.1
+
+*   Support [`CLIEngine#getRules`][] and [`rule.meta.docs.url`][] ([#1067][])
+*   Automatically restart the worker process if it dies ([#1073][])
+*   Merge all rules to ignore while typing ([#1084][])
+
+[`rule.meta.docs.url`]: https://github.com/eslint/eslint/pull/9788
+[`CLIEngine#getRules`]: https://github.com/eslint/eslint/pull/9782
+[#1067]: https://github.com/AtomLinter/linter-eslint/pull/1067
+[#1073]: https://github.com/AtomLinter/linter-eslint/pull/1073
+[#1084]: https://github.com/AtomLinter/linter-eslint/pull/1084
+
+## v8.4.0
+
+*   Normalize all config paths ([#1014][])
+*   Check for remote files ([#1017][])
+*   Allow multiple rule directories ([#1016][])
+
+[#1014]: https://github.com/AtomLinter/linter-eslint/pull/1014
+[#1016]: https://github.com/AtomLinter/linter-eslint/pull/1016
+[#1017]: https://github.com/AtomLinter/linter-eslint/pull/1017
+
+## v8.3.2
+
+*   Verify that a rule has a meta property before accessing ([#1026][])
+
+[#1026]: https://github.com/AtomLinter/linter-eslint/pull/1026
+
+## v8.3.1
+
+*   Fix deprecation warning in Atom v1.21.0 ([#1019][])
+*   Don't attempt to process fixable rules on ESLint v3 ([#1024][])
+
+[#1019]: https://github.com/AtomLinter/linter-eslint/pull/1019
+[#1024]: https://github.com/AtomLinter/linter-eslint/pull/1024
+
+## v8.3.0
+
+*   Stop breaking `BABEL_ENV` within Atom ([#961][])
+*   Handle empty `projectPath` in diagnostic command ([#962][])
+*   Set `cwd` to project directory if no `.eslintignore` is found ([#965][])
+*   Update to ESLint v4.6.0 internally ([#938][], [#997][])
+*   Add a right click command to trigger a fix job ([#963][])
+*   Ignore invalid `TextEditor`s for fix jobs ([#978][])
+*   Handle ESLint errors as a lint message ([#1015][])
+*   Add option to silence fixable rules while typing ([#1018][])
+
+[#938]: https://github.com/AtomLinter/linter-eslint/pull/938
+[#961]: https://github.com/AtomLinter/linter-eslint/pull/961
+[#962]: https://github.com/AtomLinter/linter-eslint/pull/962
+[#963]: https://github.com/AtomLinter/linter-eslint/pull/963
+[#965]: https://github.com/AtomLinter/linter-eslint/pull/965
+[#978]: https://github.com/AtomLinter/linter-eslint/pull/978
+[#997]: https://github.com/AtomLinter/linter-eslint/pull/997
+[#1015]: https://github.com/AtomLinter/linter-eslint/pull/1015
+[#1018]: https://github.com/AtomLinter/linter-eslint/pull/1018
+
+## v8.2.1
+
+*   Prevent users `.babelrc` from breaking building the package ([#922](https://github.com/AtomLinter/linter-eslint/pull/922))
+
+## v8.2.0
+
+*   Linter API v2 ([#855](https://github.com/AtomLinter/linter-eslint/pull/855))
+*   Support global Yarn installs and better errors ([#907](https://github.com/AtomLinter/linter-eslint/pull/907))
+*   Preserve `.eslintcache` on fixes ([#898](https://github.com/AtomLinter/linter-eslint/pull/898))
+*   Handle parse errors better ([#911](https://github.com/AtomLinter/linter-eslint/pull/911))
+*   Move to the Task API ([#889](https://github.com/AtomLinter/linter-eslint/pull/889))
+*   Use Atom's per-package transpilation ([#890](https://github.com/AtomLinter/linter-eslint/pull/890))
+*   Wait on specific Notifications in the specs ([#902](https://github.com/AtomLinter/linter-eslint/pull/902))
+*   Fix builds of Atom beta ([#913](https://github.com/AtomLinter/linter-eslint/pull/913))
+*   Fix embedded HTML scope with custom scopes ([#914](https://github.com/AtomLinter/linter-eslint/pull/914))
+*   Utilize `warnIgnored` instead of filtering messages ([#915](https://github.com/AtomLinter/linter-eslint/pull/915))
+*   Remove attempt to reset cursor position ([#876](https://github.com/AtomLinter/linter-eslint/pull/876))
+*   Add specs for `showRuleIdInMessage` ([#916](https://github.com/AtomLinter/linter-eslint/pull/916))
+
+## v8.1.7
+
+*   Let ESLint handle configuration where possible ([#896](https://github.com/AtomLinter/linter-eslint/pull/896))
+
 ## v8.1.6
 
 *   Reduce package activation time ([#875](https://github.com/AtomLinter/linter-eslint/pull/875))

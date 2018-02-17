@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
-        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
         "type": "local"
       },
-      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117322-7048-t2srlr.cb3rp5jyvi"
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117103-2356-f2r6z8.pjhdmtpgb9"
     ]
   ],
-  "_from": "..\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
-  "_id": "linter-ui-default@1.2.3",
+  "_from": "..\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
+  "_id": "linter-ui-default@1.6.8",
   "_inCache": true,
   "_installable": true,
   "_location": "/linter-ui-default",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
-    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:..\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
-  "_shasum": "92a6c92019a02ff06eda364918ae9aaa57ae30eb",
+  "_resolved": "file:..\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
+  "_shasum": "b5274873f4954e5451049dde5956ac00a46d7de4",
   "_shrinkwrap": null,
-  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117322-7048-e20cxk.3v92qyf1or\\package.tgz",
-  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117322-7048-t2srlr.cb3rp5jyvi",
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-117103-2356-j2ztpn.jaffv6xbt9\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-117103-2356-f2r6z8.pjhdmtpgb9",
   "bugs": {
     "url": "https://github.com/steelbrain/linter-ui-default/issues"
   },
@@ -70,15 +70,14 @@
       "default": false,
       "order": 1
     },
-    "panelTakesMinimumHeight": {
-      "title": "Panel Takes Minimum Height",
-      "description": "Reduce panel height when it exceeds the height of the error list",
+    "useBusySignal": {
+      "description": "Whether to integrate with the `busy-signal` package",
       "type": "boolean",
       "default": true,
       "order": 1
     },
-    "useBusySignal": {
-      "description": "Whether to integrate with the `busy-signal` package",
+    "hidePanelWhenEmpty": {
+      "description": "Hide panel when there are no issues to display",
       "type": "boolean",
       "default": true,
       "order": 1
@@ -121,7 +120,7 @@
         "Entire Project",
         "Current File"
       ],
-      "default": "Current File",
+      "default": "Entire Project",
       "order": 2
     },
     "statusBarClickBehavior": {
@@ -129,6 +128,7 @@
       "type": "string",
       "enum": [
         "Toggle Panel",
+        "Toggle Status Bar Scope",
         "Jump to next issue"
       ],
       "default": "Toggle Panel",
@@ -138,10 +138,11 @@
       "type": "string",
       "description": "Choose whether tooltips show on mouseover, or follow the keyboard cursor",
       "enum": [
+        "Both",
         "Mouse",
         "Keyboard"
       ],
-      "default": "Mouse",
+      "default": "Both",
       "order": 2
     },
     "gutterPosition": {
@@ -159,7 +160,7 @@
       "title": "Panel Height",
       "description": "in px",
       "type": "number",
-      "default": 150,
+      "default": 100,
       "order": 3
     }
   },
@@ -181,19 +182,18 @@
     "marked": "^0.3.6",
     "react": "^15.3.1",
     "react-dom": "^15.3.2",
-    "react-resizable-box": "^1.8.1",
     "sb-debounce": "^1.0.1",
     "sb-react-table": "^1.0.1"
   },
   "description": "Default UI for the Linter package",
   "devDependencies": {
     "eslint-config-steelbrain": "^3.0.0",
-    "flow-bin": "^0.43.0",
+    "flow-bin": "^0.52.0",
     "jasmine-fix": "^1.0.1",
     "rimraf": "^2.5.4"
   },
   "engines": {
-    "atom": ">=1.4.0 <2.0.0"
+    "atom": ">=1.17.0 <2.0.0"
   },
   "homepage": "https://github.com/steelbrain/linter-ui-default#readme",
   "keywords": [
@@ -220,7 +220,7 @@
       }
     }
   },
-  "readme": "Linter-UI-Default\n================\n\n[![Greenkeeper badge](https://badges.greenkeeper.io/steelbrain/linter-ui-default.svg)](https://greenkeeper.io/)\n\n[![Slack Badge](https://img.shields.io/badge/chat-atom.io%20slack-blue.svg?style=flat-square)](http://atom-slack.herokuapp.com/)\n[![Build Status](https://img.shields.io/circleci/project/steelbrain/linter-ui-default.svg?style=flat-square)](https://circleci.com/gh/steelbrain/linter-ui-default)\n[![Plugin installs!](https://img.shields.io/apm/dm/linter-ui-default.svg?style=flat-square)](https://atom.io/packages/linter-ui-default)\n[![Package version!](https://img.shields.io/apm/v/linter-ui-default.svg?style=flat-square)](https://atom.io/packages/linter-ui-defeault)\n[![Dependencies!](https://img.shields.io/david/steelbrain/linter-ui-default.svg?style=flat-square)](https://david-dm.org/steelbrain/linter-ui-default)\n\nThe default UI for linter.\n\n![Preview](https://cloud.githubusercontent.com/assets/4278113/23879933/1ab17e2a-0872-11e7-803d-3fe0ccfc6790.gif)\n\n### Installation\n\nYou can install it from the CLI\n\n```\napm install linter-ui-default\n```\n\nOr you can install from Settings view by searching for `linter-ui-default`.\n\n### License\n\nThis Project is licensed under the terms of MIT License, check the license file for more info.\n",
+  "readme": "Linter-UI-Default\n================\n\n[![Greenkeeper badge](https://badges.greenkeeper.io/steelbrain/linter-ui-default.svg)](https://greenkeeper.io/)\n\n[![Slack Badge](https://img.shields.io/badge/chat-atom.io%20slack-blue.svg?style=flat-square)](http://atom-slack.herokuapp.com/)\n[![Build Status](https://img.shields.io/circleci/project/steelbrain/linter-ui-default.svg?style=flat-square)](https://circleci.com/gh/steelbrain/linter-ui-default)\n[![Plugin installs!](https://img.shields.io/apm/dm/linter-ui-default.svg?style=flat-square)](https://atom.io/packages/linter-ui-default)\n[![Package version!](https://img.shields.io/apm/v/linter-ui-default.svg?style=flat-square)](https://atom.io/packages/linter-ui-default)\n[![Dependencies!](https://img.shields.io/david/steelbrain/linter-ui-default.svg?style=flat-square)](https://david-dm.org/steelbrain/linter-ui-default)\n\nThe default UI for linter.\n\n![Preview](https://cloud.githubusercontent.com/assets/4278113/23879933/1ab17e2a-0872-11e7-803d-3fe0ccfc6790.gif)\n\n### Installation\n\nYou can install it from the CLI\n\n```\napm install linter-ui-default\n```\n\nOr you can install from Settings view by searching for `linter-ui-default`.\n\n### License\n\nThis Project is licensed under the terms of MIT License, check the license file for more info.\n",
   "readmeFilename": "README.md",
   "repository": {
     "type": "git",
@@ -229,13 +229,13 @@
   "scripts": {
     "test": "(apm test) && (flow check) && (eslint . )"
   },
-  "version": "1.2.3",
+  "version": "1.6.8",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "asap",
-        "version": "2.0.5",
+        "version": "2.0.6",
         "path": "node_modules\\asap\\asap.js"
       },
       {
@@ -250,13 +250,18 @@
       },
       {
         "name": "consistent-env",
-        "version": "1.3.0",
+        "version": "1.3.1",
         "path": "node_modules\\consistent-env\\lib\\index.js"
       },
       {
         "name": "core-js",
         "version": "1.2.7",
         "path": "node_modules\\core-js\\index.js"
+      },
+      {
+        "name": "create-react-class",
+        "version": "15.6.2",
+        "path": "node_modules\\create-react-class\\index.js"
       },
       {
         "name": "disposable-event",
@@ -270,12 +275,12 @@
       },
       {
         "name": "fbjs",
-        "version": "0.8.12",
+        "version": "0.8.16",
         "path": "node_modules\\fbjs\\index.js"
       },
       {
         "name": "iconv-lite",
-        "version": "0.4.15",
+        "version": "0.4.19",
         "path": "node_modules\\iconv-lite\\lib\\index.js"
       },
       {
@@ -295,13 +300,8 @@
       },
       {
         "name": "js-tokens",
-        "version": "3.0.1",
+        "version": "3.0.2",
         "path": "node_modules\\js-tokens\\index.js"
-      },
-      {
-        "name": "lodash.isequal",
-        "version": "4.5.0",
-        "path": "node_modules\\lodash.isequal\\index.js"
       },
       {
         "name": "lodash.uniq",
@@ -320,7 +320,7 @@
       },
       {
         "name": "node-fetch",
-        "version": "1.6.3",
+        "version": "1.7.3",
         "path": "node_modules\\node-fetch\\index.js"
       },
       {
@@ -330,28 +330,23 @@
       },
       {
         "name": "promise",
-        "version": "7.1.1",
+        "version": "7.3.1",
         "path": "node_modules\\promise\\index.js"
       },
       {
         "name": "prop-types",
-        "version": "15.5.8",
+        "version": "15.6.0",
         "path": "node_modules\\prop-types\\index.js"
       },
       {
         "name": "react",
-        "version": "15.5.4",
+        "version": "15.6.2",
         "path": "node_modules\\react\\react.js"
       },
       {
         "name": "react-dom",
-        "version": "15.5.4",
+        "version": "15.6.2",
         "path": "node_modules\\react-dom\\index.js"
-      },
-      {
-        "name": "react-resizable-box",
-        "version": "1.8.4",
-        "path": "node_modules\\react-resizable-box\\lib\\index.js"
       },
       {
         "name": "sb-callsite",
@@ -390,7 +385,7 @@
       },
       {
         "name": "sb-promisify",
-        "version": "2.0.1",
+        "version": "2.0.2",
         "path": "node_modules\\sb-promisify\\lib\\index.js"
       },
       {
@@ -400,7 +395,7 @@
       },
       {
         "name": "semver",
-        "version": "5.3.0",
+        "version": "5.4.1",
         "path": "node_modules\\semver\\semver.js"
       },
       {
@@ -415,7 +410,7 @@
       },
       {
         "name": "ua-parser-js",
-        "version": "0.7.12",
+        "version": "0.7.17",
         "path": "node_modules\\ua-parser-js\\src\\ua-parser.js"
       },
       {
@@ -435,6 +430,7 @@
         "node_modules\\consistent-env\\package.json",
         "node_modules\\core-js\\bower.json",
         "node_modules\\core-js\\package.json",
+        "node_modules\\create-react-class\\package.json",
         "node_modules\\disposable-event\\.eslintrc.json",
         "node_modules\\disposable-event\\package.json",
         "node_modules\\encoding\\package.json",
@@ -454,7 +450,6 @@
         "node_modules\\isomorphic-fetch\\bower.json",
         "node_modules\\isomorphic-fetch\\package.json",
         "node_modules\\js-tokens\\package.json",
-        "node_modules\\lodash.isequal\\package.json",
         "node_modules\\lodash.uniq\\package.json",
         "node_modules\\loose-envify\\package.json",
         "node_modules\\marked\\bower.json",
@@ -466,7 +461,6 @@
         "node_modules\\prop-types\\package.json",
         "node_modules\\react\\package.json",
         "node_modules\\react-dom\\package.json",
-        "node_modules\\react-resizable-box\\package.json",
         "node_modules\\sb-callsite\\package.json",
         "node_modules\\sb-debounce\\package.json",
         "node_modules\\sb-event-kit\\package.json",
@@ -477,7 +471,6 @@
         "node_modules\\sb-memoize\\package.json",
         "node_modules\\sb-npm-path\\.eslintrc.json",
         "node_modules\\sb-npm-path\\package.json",
-        "node_modules\\sb-promisify\\.eslintrc.json",
         "node_modules\\sb-promisify\\package.json",
         "node_modules\\sb-react-table\\.eslintrc.json",
         "node_modules\\sb-react-table\\package.json",
@@ -486,8 +479,8 @@
         "node_modules\\strip-bom-buf\\package.json",
         "node_modules\\ua-parser-js\\bower.json",
         "node_modules\\ua-parser-js\\package.json",
-        "node_modules\\ua-parser-js\\ua-parser-js.jquery.json",
         "node_modules\\whatwg-fetch\\package.json",
+        "package-lock.json",
         "package.json"
       ],
       ".js": [
@@ -502,8 +495,10 @@
         "lib\\main.js",
         "lib\\panel\\component.js",
         "lib\\panel\\delegate.js",
+        "lib\\panel\\dock.js",
         "lib\\panel\\index.js",
         "lib\\status-bar\\element.js",
+        "lib\\status-bar\\helpers.js",
         "lib\\status-bar\\index.js",
         "lib\\tooltip\\delegate.js",
         "lib\\tooltip\\index.js",
@@ -521,7 +516,6 @@
         "node_modules\\atom-package-deps\\lib\\types.js",
         "node_modules\\atom-package-deps\\lib\\view.js",
         "node_modules\\atom-package-path\\lib\\index.js",
-        "node_modules\\consistent-env\\decls\\jasmine.js",
         "node_modules\\consistent-env\\lib\\helpers.js",
         "node_modules\\consistent-env\\lib\\index.js",
         "node_modules\\core-js\\build\\config.js",
@@ -1377,6 +1371,10 @@
         "node_modules\\core-js\\web\\immediate.js",
         "node_modules\\core-js\\web\\index.js",
         "node_modules\\core-js\\web\\timers.js",
+        "node_modules\\create-react-class\\create-react-class.js",
+        "node_modules\\create-react-class\\create-react-class.min.js",
+        "node_modules\\create-react-class\\factory.js",
+        "node_modules\\create-react-class\\index.js",
         "node_modules\\disposable-event\\decls\\jasmine.js",
         "node_modules\\disposable-event\\lib\\index.js",
         "node_modules\\encoding\\lib\\encoding.js",
@@ -1506,7 +1504,6 @@
         "node_modules\\isomorphic-fetch\\fetch-npm-browserify.js",
         "node_modules\\isomorphic-fetch\\fetch-npm-node.js",
         "node_modules\\js-tokens\\index.js",
-        "node_modules\\lodash.isequal\\index.js",
         "node_modules\\lodash.uniq\\index.js",
         "node_modules\\loose-envify\\cli.js",
         "node_modules\\loose-envify\\custom.js",
@@ -1521,6 +1518,7 @@
         "node_modules\\node-fetch\\lib\\body.js",
         "node_modules\\node-fetch\\lib\\fetch-error.js",
         "node_modules\\node-fetch\\lib\\headers.js",
+        "node_modules\\node-fetch\\lib\\index.js",
         "node_modules\\node-fetch\\lib\\request.js",
         "node_modules\\node-fetch\\lib\\response.js",
         "node_modules\\object-assign\\index.js",
@@ -1575,6 +1573,7 @@
         "node_modules\\react\\dist\\react.min.js",
         "node_modules\\react\\lib\\canDefineProperty.js",
         "node_modules\\react\\lib\\checkReactTypeSpec.js",
+        "node_modules\\react\\lib\\createClass.js",
         "node_modules\\react\\lib\\deprecated.js",
         "node_modules\\react\\lib\\flattenChildren.js",
         "node_modules\\react\\lib\\getIteratorFn.js",
@@ -1582,14 +1581,14 @@
         "node_modules\\react\\lib\\getNextDebugIDUMDShim.js",
         "node_modules\\react\\lib\\KeyEscapeUtils.js",
         "node_modules\\react\\lib\\LinkedStateMixin.js",
+        "node_modules\\react\\lib\\lowPriorityWarning.js",
         "node_modules\\react\\lib\\onlyChild.js",
         "node_modules\\react\\lib\\PooledClass.js",
         "node_modules\\react\\lib\\React.js",
         "node_modules\\react\\lib\\ReactAddonsDOMDependencies.js",
         "node_modules\\react\\lib\\ReactAddonsDOMDependenciesUMDShim.js",
+        "node_modules\\react\\lib\\ReactBaseClasses.js",
         "node_modules\\react\\lib\\ReactChildren.js",
-        "node_modules\\react\\lib\\ReactClass.js",
-        "node_modules\\react\\lib\\ReactComponent.js",
         "node_modules\\react\\lib\\ReactComponentTreeDevtool.js",
         "node_modules\\react\\lib\\ReactComponentTreeHook.js",
         "node_modules\\react\\lib\\ReactComponentTreeHookUMDShim.js",
@@ -1611,7 +1610,6 @@
         "node_modules\\react\\lib\\ReactPropTypeLocations.js",
         "node_modules\\react\\lib\\ReactPropTypes.js",
         "node_modules\\react\\lib\\ReactPropTypesSecret.js",
-        "node_modules\\react\\lib\\ReactPureComponent.js",
         "node_modules\\react\\lib\\ReactStateSetters.js",
         "node_modules\\react\\lib\\ReactTransitionChildMapping.js",
         "node_modules\\react\\lib\\ReactTransitionEvents.js",
@@ -1675,11 +1673,13 @@
         "node_modules\\react-dom\\lib\\getTextContentAccessor.js",
         "node_modules\\react-dom\\lib\\getVendorPrefixedEventName.js",
         "node_modules\\react-dom\\lib\\HTMLDOMPropertyConfig.js",
+        "node_modules\\react-dom\\lib\\inputValueTracking.js",
         "node_modules\\react-dom\\lib\\instantiateReactComponent.js",
         "node_modules\\react-dom\\lib\\isEventSupported.js",
         "node_modules\\react-dom\\lib\\isTextInputElement.js",
         "node_modules\\react-dom\\lib\\KeyEscapeUtils.js",
         "node_modules\\react-dom\\lib\\LinkedValueUtils.js",
+        "node_modules\\react-dom\\lib\\lowPriorityWarning.js",
         "node_modules\\react-dom\\lib\\PluginModuleType.js",
         "node_modules\\react-dom\\lib\\PooledClass.js",
         "node_modules\\react-dom\\lib\\quoteAttributeValueForBrowser.js",
@@ -1800,8 +1800,6 @@
         "node_modules\\react-dom\\lib\\ViewportMetrics.js",
         "node_modules\\react-dom\\server.js",
         "node_modules\\react-dom\\test-utils.js",
-        "node_modules\\react-resizable-box\\lib\\index.js",
-        "node_modules\\react-resizable-box\\lib\\resizer.js",
         "node_modules\\sb-callsite\\lib\\main.js",
         "node_modules\\sb-debounce\\index.js",
         "node_modules\\sb-debounce\\test.js",
@@ -1818,7 +1816,6 @@
         "node_modules\\sb-npm-path\\decls\\jasmine.js",
         "node_modules\\sb-npm-path\\lib\\helpers.js",
         "node_modules\\sb-npm-path\\lib\\index.js",
-        "node_modules\\sb-promisify\\decls\\jasmine.js",
         "node_modules\\sb-promisify\\lib\\index.js",
         "node_modules\\sb-react-table\\lib\\helpers.js",
         "node_modules\\sb-react-table\\lib\\index.js",
@@ -1852,7 +1849,6 @@
           "marked": "^0.3.6",
           "react": "^15.3.1",
           "react-dom": "^15.3.2",
-          "react-resizable-box": "^1.8.1",
           "sb-debounce": "^1.0.1",
           "sb-react-table": "^1.0.1"
         }
@@ -1882,11 +1878,20 @@
       {
         "paths": [
           "node_modules\\consistent-env",
-          "node_modules\\consistent-env\\decls",
           "node_modules\\consistent-env\\lib"
         ],
         "dependencies": {
           "lodash.uniq": "^4.5.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\create-react-class"
+        ],
+        "dependencies": {
+          "fbjs": "^0.8.9",
+          "loose-envify": "^1.3.1",
+          "object-assign": "^4.1.1"
         }
       },
       {
@@ -1973,7 +1978,9 @@
           "node_modules\\prop-types\\lib"
         ],
         "dependencies": {
-          "fbjs": "^0.8.9"
+          "fbjs": "^0.8.16",
+          "loose-envify": "^1.3.1",
+          "object-assign": "^4.1.1"
         }
       },
       {
@@ -1983,10 +1990,11 @@
           "node_modules\\react"
         ],
         "dependencies": {
+          "create-react-class": "^15.6.0",
           "fbjs": "^0.8.9",
           "loose-envify": "^1.1.0",
           "object-assign": "^4.1.0",
-          "prop-types": "^15.5.7"
+          "prop-types": "^15.5.10"
         }
       },
       {
@@ -1999,16 +2007,7 @@
           "fbjs": "^0.8.9",
           "loose-envify": "^1.1.0",
           "object-assign": "^4.1.0",
-          "prop-types": "~15.5.7"
-        }
-      },
-      {
-        "paths": [
-          "node_modules\\react-resizable-box\\lib",
-          "node_modules\\react-resizable-box"
-        ],
-        "dependencies": {
-          "lodash.isequal": "^4.2.0"
+          "prop-types": "^15.5.10"
         }
       },
       {

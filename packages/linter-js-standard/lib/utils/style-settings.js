@@ -1,5 +1,5 @@
 /* global atom */
-var minimatch = require('minimatch')
+var ignore = require('ignore')
 var pkgConfig = require('pkg-config')
 var fs = require('fs')
 
@@ -11,7 +11,7 @@ var styleOptions = [
   'uber-standard'
 ]
 
-function checkStyleSettings (filePath) {
+function checkStyleSettings (filePath, textEditor) {
   var settings = {}
   var projectPath = null
 
@@ -19,24 +19,22 @@ function checkStyleSettings (filePath) {
   // NOTE: the project's path returned will be
   // from the nearest package.json (direction upward)
   try {
-    var activePane = atom.workspace.getActiveTextEditor()
+    var textEditorPath = textEditor.getPath()
 
-    if (!activePane || !activePane.getPath) {
+    if (!textEditorPath) {
       settings.style = 'no-style'
       return settings
     }
 
-    var relativeActivePanePath = activePane.getPath()
-
-    if (!relativeActivePanePath) {
-      settings.style = 'no-style'
-      return settings
+    try {
+      textEditorPath = fs.realpathSync(textEditorPath)
+    } catch (e) {
+      if (e.code !== 'ENOENT') throw e
     }
 
-    var absoluteActivePanePath = fs.realpathSync(relativeActivePanePath)
     var projectPaths = atom.project.getPaths()
 
-    projectPath = projectPaths.find((p) => absoluteActivePanePath.indexOf(fs.realpathSync(p)) >= 0)
+    projectPath = projectPaths.find((p) => textEditorPath.indexOf(fs.realpathSync(p)) >= 0)
   } catch (e) {
     console.error('Could not get project path', e)
     return
@@ -72,15 +70,12 @@ function checkStyleSettings (filePath) {
 
     // If ignore glob patterns are present
     if (styleSettings.ignore && relativeFilePath) {
-      var ignoreGlobPatterns = []
-      ignoreGlobPatterns = ignoreGlobPatterns.concat(styleSettings.ignore)
-
-      ignoreGlobPatterns = ignoreGlobPatterns.some(function (pattern) {
-        return minimatch(relativeFilePath, pattern)
-      })
+      const ignores = ignore()
+        .add(styleSettings.ignore)
+        .ignores(relativeFilePath)
 
       // If a glob pattern was matched, do not lint the file
-      if (ignoreGlobPatterns) {
+      if (ignores) {
         settings.style = 'no-style'
         return settings
       }
@@ -93,11 +88,16 @@ function checkStyleSettings (filePath) {
       settings.globals = [].concat(styleSettings.global || [])
     }
 
+    styleSettings.env = styleSettings.env || styleSettings.envs
+
     if (styleSettings.env) {
-      settings.env = {}
-      Object.keys(styleSettings.env).forEach(function (key) {
-        settings.env[key] = styleSettings.env[key]
-      })
+      if (!Array.isArray(styleSettings.env) && typeof styleSettings.env !== 'string') {
+        styleSettings.env = Object
+          .keys(styleSettings.env)
+          .filter(env => styleSettings.env[env])
+      }
+
+      settings.env = [].concat(styleSettings.env || [])
     }
   }
 

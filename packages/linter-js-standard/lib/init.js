@@ -1,124 +1,79 @@
+/** @babel */
+
 // Dependencies
-var CompositeDisposable = require('atom').CompositeDisposable
-var selectStyle = require('./utils/select-style')
-var styleSettings = require('./utils/style-settings')
+import { CompositeDisposable } from 'atom'
+import styleSettings from './utils/style-settings'
 
-module.exports = {
-  config: {
-    style: {
-      type: 'string',
-      default: styleSettings.defaultStyle,
-      enum: styleSettings.styleOptions
-    },
-    checkStyleDevDependencies: {
-      type: 'boolean',
-      title: 'Check for standard',
-      description: 'Only run if standard, semistandard or happiness present in package.json `devDependencies`',
-      default: false
-    },
-    honorStyleSettings: {
-      type: 'boolean',
-      description: 'Honor code style settings on package.json',
-      default: true
-    },
-    showEslintRules: {
-      type: 'boolean',
-      description: 'Show the eslint rule name on error/warning\'s message',
-      default: false
-    },
-    lintMarkdownFiles: {
-      type: 'boolean',
-      description: 'Lint markdown fenced code blocks',
-      default: false
-    },
-    lintHtmlFiles: {
-      type: 'boolean',
-      description: 'Lint html-embedded script blocks',
-      default: false
-    }
+const scope = ['source.js', 'source.js.jsx', 'source.js.jquery', 'source.gfm', 'source.vue']
+
+export const config = {
+  style: {
+    type: 'string',
+    default: styleSettings.defaultStyle,
+    enum: styleSettings.styleOptions
   },
-  cache: new Map(),
-  subscriptions: {},
-  scope: ['source.js', 'source.js.jsx', 'source.js.jquery', 'source.gfm', 'source.vue'],
-  activate: function () {
-    var self = this
-
-    // Install linter-js-standard dependencies
-    require('atom-package-deps')
-    .install('linter-js-standard')
-    .then(function () {
-      var config = atom.config.get('linter-js-standard')
-      self.cache.set('config', config)
-
-      var storeSettings = function (paneItem) {
-        // Check if the pane is a file
-        if (!self.__checkIfTextEditor(paneItem)) {
-          return
-        }
-
-        // Get config
-        var config = self.cache.get('config')
-
-        // Check if this file is inside our grammar scope
-        var grammar = paneItem.getGrammar() || { scopeName: null }
-
-        // Check if this file is inside any kind of html scope (such as text.html.basic among others)
-        if (config.lintHtmlFiles && /^text.html/.test(grammar.scopeName) && self.scope.indexOf(grammar.scopeName) < 0) {
-          self.scope.push(grammar.scopeName)
-        }
-
-        if (!config.lintHtmlFiles && /^text.html/.test(grammar.scopeName)) {
-          return
-        }
-
-        if (self.scope.indexOf(grammar.scopeName) < 0 || (!config.lintMarkdownFiles && grammar.scopeName === 'source.gfm')) {
-          return
-        }
-
-        // Cache active pane
-        self.__cacheTextEditor(config, paneItem)
-      }
-
-      // On startup get active pane
-      // check if it's a text editor
-      // if it is cache it's settings
-      var paneItem = atom.workspace.getActivePaneItem()
-      storeSettings(paneItem)
-
-      // Create some subscriptions
-      self.subscriptions = new CompositeDisposable()
-
-      self.subscriptions.add(atom.workspace.onDidChangeActivePaneItem(storeSettings))
-
-      // on package settings change
-      self.subscriptions.add(atom.config.observe('linter-js-standard', function (config) {
-        // Cache config
-        self.cache.set('config', config)
-      }))
-    })
+  checkStyleDevDependencies: {
+    type: 'boolean',
+    title: 'Check for standard',
+    description: 'Only run if standard, semistandard or happiness present in package.json `devDependencies`',
+    default: false
   },
-
-  deactivate: function () {
-    this.subscriptions.dispose()
+  checkForEslintConfig: {
+    type: 'boolean',
+    title: 'Disable if the project uses ESLint',
+    description: 'Do not run if the project has configured ESLint',
+    default: true
   },
-
-  __cacheTextEditor: function (config, textEditor) {
-    var filePath = textEditor.getPath()
-
-    var opts = config.honorStyleSettings ? styleSettings.checkStyleSettings(filePath) : {}
-
-    var style = selectStyle(filePath, {
-      style: opts.style || config.style,
-      checkStyleDevDependencies: config.checkStyleDevDependencies
-    })
-
-    // Cache style settings and args of some file
-    this.cache.set('text-editor', { style: style, opts: opts })
+  honorStyleSettings: {
+    type: 'boolean',
+    description: 'Honor code style settings on package.json',
+    default: true
   },
-
-  __checkIfTextEditor: function (paneItem) {
-    return (paneItem && typeof paneItem.getGrammar === 'function' && typeof paneItem.getPath === 'function')
+  showEslintRules: {
+    type: 'boolean',
+    title: 'Show ESLint Rules',
+    description: 'Show the ESLint rule name on error/warning\'s message',
+    default: false
   },
-
-  provideLinter: require('./linter-js-standard')
+  lintMarkdownFiles: {
+    type: 'boolean',
+    description: 'Lint markdown fenced code blocks',
+    default: false
+  },
+  lintHtmlFiles: {
+    type: 'boolean',
+    title: 'Lint HTML Files',
+    description: 'Lint HTML-embedded script blocks',
+    default: false
+  }
 }
+
+export async function activate () {
+  // Install linter-js-standard dependencies
+  await require('atom-package-deps').install('linter-js-standard')
+
+  this.subscriptions = new CompositeDisposable()
+
+  this.subscriptions.add(atom.workspace.observeTextEditors(textEditor => {
+    const config = atom.config.get('linter-js-standard')
+
+    const grammar = textEditor.getGrammar() || { scopeName: null }
+
+    // Check if this file is inside any kind of html scope (such as text.html.basic among others)
+    if (config.lintHtmlFiles && /^text.html/.test(grammar.scopeName)) {
+      scope.push(grammar.scopeName)
+    }
+  }))
+}
+
+export function deactivate () {
+  this.subscriptions.dispose()
+}
+
+export const provideLinter = () => ({
+  name: 'js-standard',
+  grammarScopes: scope,
+  scope: 'file',
+  lintsOnChange: true,
+  lint: require('./linter-js-standard')
+})

@@ -1,7 +1,11 @@
 "*":
+  "atom-clock": {}
+  "atom-easy-jsdoc":
+    useReturns: true
   "atom-package-deps":
     ignored: []
-  "autoclose-html": {}
+  "autoclose-html":
+    makeNeverCloseSelfClosing: false
   "autocomplete-plus":
     confirmCompletion: "enter"
     minimumWordLength: 1
@@ -10,10 +14,12 @@
     allowPendingPaneItems: false
     automaticallyUpdate: false
     disabledPackages: [
-      "linter-javac"
       "project-manager"
       "fast-eslint"
       "linter-js-standard"
+      "linter-csslint"
+      "spell-check"
+      "Hydrogen"
     ]
     openEmptyEditorOnStart: false
     packagesWithKeymapsDisabled: [
@@ -28,11 +34,16 @@
     warnOnLargeFileLimit: 2
   editor:
     backUpBeforeSaving: true
+    fontSize: 16
     scrollPastEnd: true
     scrollSensitivity: 60
     zoomFontWhenCtrlScrolling: false
   "exception-reporting":
     userId: "83917c78-9c35-f970-8767-722c39816fca"
+  "file-icons":
+    coloured: false
+    onChanges: true
+    tabPaneIcon: false
   "linter-javac":
     additionalClasspaths: "bin/"
     additionalJavacOptions: "-sourcepath src/ -d bin"
@@ -52,6 +63,7 @@
   wordcount:
     alwaysOn: true
     noextension: true
+    showprice: true
 ".basic.html.source":
   editor:
     tabLength: 4
@@ -64,6 +76,9 @@
 ".cpp.source":
   editor:
     tabLength: 4
+".css.source":
+  editor:
+    tabLength: 2
 ".gfm.source":
   editor:
     showInvisibles: false

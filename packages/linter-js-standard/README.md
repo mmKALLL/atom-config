@@ -35,6 +35,9 @@ Check code style in package.json `devDependencies` or `dependencies`. If a valid
 
 > Note: This will use the nearest package.json.
 
+### checkForEslintConfig (default: true)
+Check if the project uses ESLint using [detect-eslint-config](https://github.com/chee/detect-eslint-config). If it does it won’t lint.
+
 ### honorStyleSettings (default: true)
 Honors style settings defined in package.json.
 
@@ -49,7 +52,7 @@ Switch between standard and semistandard styles.
 If `checkStyleDevDependencies` is true this setting will be **ignored**.
 
 ### showEslintRules (default: false)
-Enable/disable showing the id of the offended eslint rules.
+Enable/disable showing the id of the offended ESLint rules.
 
 Example of messages while showEslintRules is:
 - **true:** Extra semicolon. (semi)

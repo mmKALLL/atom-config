@@ -12,11 +12,11 @@
 
 #### An ESLint [Shareable Config](http://eslint.org/docs/developer-guide/shareable-configs) for JSX support in [JavaScript Happiness Style](https://github.com/JedWatson/happiness)
 
-This module is for advanced users. You probably want to use [`happiness`](https://github.com/JedWatson/happiness) instead :)
-
 [![js-happiness-style](https://cdn.rawgit.com/JedWatson/happiness/master/badge.svg)](https://github.com/JedWatson/happiness)
 
 ## Install
+
+This module is for advanced users. You probably want to use [`standard`](http://standardjs.com) instead :)
 
 ```bash
 npm install eslint-config-happiness-jsx
@@ -35,7 +35,7 @@ rules provided in
 It doesn't assume that you're using React, so other virtual DOM libraries like
 `virtual-dom` and `deku` are supported.
 
-Even thought this config is JSX only (no React), it makes use of
+Even though this config is JSX only (no React), it makes use of
 [`eslint-plugin-react`](https://npmjs.com/package/eslint-plugin-react) for its generic
 JSX rules.
 
@@ -46,7 +46,7 @@ instead.)
 Here's how to install everything you need:
 
 ```bash
-npm install eslint-config-happiness eslint-config-happiness-jsx eslint-plugin-react
+npm install --save-dev eslint-config-happiness eslint-config-happiness-jsx eslint-plugin-standard eslint-plugin-promise eslint-plugin-import eslint-plugin-node eslint-plugin-react
 ```
 
 Then, add this to your .eslintrc file:
