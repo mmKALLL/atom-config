@@ -2,40 +2,40 @@
   "_args": [
     [
       {
-        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
+        "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
         "scope": null,
         "escapedName": null,
         "name": null,
-        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
-        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
+        "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
+        "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
         "type": "local"
       },
-      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118112-13912-5c4pmk.u3bepqr529"
+      "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118313-10292-1ozsdk2.nt6zdunmi"
     ]
   ],
-  "_from": "..\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
-  "_id": "fast-eslint@4.8.0",
+  "_from": "..\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
+  "_id": "fast-eslint@4.9.0",
   "_inCache": true,
   "_installable": true,
   "_location": "/fast-eslint",
   "_phantomChildren": {},
   "_requested": {
-    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
+    "raw": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
     "scope": null,
     "escapedName": null,
     "name": null,
-    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
-    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
+    "rawSpec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
+    "spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
     "type": "local"
   },
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "file:..\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
-  "_shasum": "23a287743f61d4e4278435fe55a235f54aa1435c",
+  "_resolved": "file:..\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
+  "_shasum": "2ad63fe601385f5ff9771c69305a4ec28fd664f8",
   "_shrinkwrap": null,
-  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118112-13912-p9rey4.yraunv1jor\\package.tgz",
-  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118112-13912-5c4pmk.u3bepqr529",
+  "_spec": "C:\\Users\\admin\\AppData\\Local\\Temp\\d-118313-10292-1kd5fx3.qaropw4s4i\\package.tgz",
+  "_where": "C:\\Users\\admin\\AppData\\Local\\Temp\\apm-install-dir-118313-10292-1ozsdk2.nt6zdunmi",
   "activationCommands": [],
   "author": {
     "name": "Arnaud Dezandee",
@@ -44,11 +44,6 @@
   },
   "bugs": {
     "url": "https://github.com/Adezandee/fast-eslint/issues"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   },
   "configSchema": {
     "baseConfigExtends": {
@@ -79,19 +74,17 @@
   },
   "dependencies": {
     "atom-linter": "10.0.0",
-    "atom-package-deps": "4.6.1",
-    "eslint": "4.13.1",
+    "atom-package-deps": "4.6.2",
+    "eslint": "4.19.1",
     "loophole": "1.1.0"
   },
   "description": "ESLint linter plugin for JavaScript, lightweight",
   "devDependencies": {
-    "condition-circle": "~1.5.0",
-    "conventional-changelog-cli": "~1.3.5",
-    "cz-conventional-changelog": "~2.1.0",
+    "@semantic-release/apm-config": "2.0.0",
+    "conventional-changelog-cli": "~1.3.21",
     "eslint-config-airbnb-base": "~12.1.0",
-    "eslint-plugin-import": "~2.8.0",
-    "last-release-apm": "~1.3.1",
-    "semantic-release": "~7.0.2"
+    "eslint-plugin-import": "~2.10.0",
+    "semantic-release": "15.1.4"
   },
   "engines": {
     "atom": ">=1.0.0"
@@ -125,29 +118,24 @@
   "readme": "# Fast-ESLint\n\n[![APM][apm-v-image]][apm-url]\n[![CircleCI][circle-image]][circle-url]\n[![David][david-image]][david-url]\n[![APM][apm-d-image]][apm-url]\n\n[![semantic-release][semantic-image]][semantic-url]\n[![ESLint][standard-image]][standard-url]\n[![Commitizen friendly][commitizen-image]][commitizen-url]\n\nLightweight ESLint plugin for Atom.\n\n* ESLint is already highly configurable through `.eslintrc` files.\n* Same behavior as: `$ cd /path/to/file && eslint src.js`.\n* It's fast !\n\n:warning: ESLint v3.0.0 now requires that you use a configuration to run. See [migrating-to-3.0.0](https://github.com/eslint/eslint/blob/master/docs/user-guide/migrating-to-3.0.0.md)\n\n## Installation\n\n* `apm install fast-eslint`\n* choose a popular shared config (or build your own) and follow installation instructions\n\n### Popular style guides\n\n* Airbnb: [eslint-config-airbnb](https://github.com/airbnb/javascript)\n* Standard: [eslint-config-standard](https://github.com/feross/standard)\n* Google: [eslint-config-google](https://github.com/google/eslint-config-google)\n* XO: [eslint-config-xo](https://github.com/sindresorhus/eslint-config-xo)\n\n### Example Settings for `standard` & `standard-react`\n\n* `npm install -g eslint-config-standard eslint-config-standard-react`\n\n### Project / System configuration\n\nCreate `.eslintrc.*` file either in your project or home directory.\n\n``` json\n{\n  \"extends\": [\"standard\", \"standard-react\"]\n}\n```\n\n### Atom wide configuration\n\nGo to `Atom` -> `Config...` and enter:\n\n``` coffee\n\"*\":\n  \"fast-eslint\":\n    baseConfigExtends: [\n      \"standard\",\n      \"standard-react\"\n    ]\n```\n\n### MIT License\n\nCopyright (c) 2016 Arnaud Dezandee\n\n[apm-v-image]: https://img.shields.io/apm/v/fast-eslint.svg\n[apm-d-image]: https://img.shields.io/apm/dm/fast-eslint.svg\n[apm-url]: https://atom.io/packages/fast-eslint\n[circle-image]: https://img.shields.io/circleci/project/Adezandee/fast-eslint/master.svg\n[circle-url]: https://circleci.com/gh/Adezandee/fast-eslint/tree/master\n[david-image]: https://img.shields.io/david/Adezandee/fast-eslint.svg\n[david-url]: https://david-dm.org/Adezandee/fast-eslint\n[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat\n[semantic-url]: https://github.com/semantic-release/semantic-release\n[standard-image]: https://img.shields.io/badge/code%20style-airbnb-brightgreen.svg?style=flat\n[standard-url]: https://github.com/airbnb/javascript\n[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat\n[commitizen-url]: http://commitizen.github.io/cz-cli/\n",
   "readmeFilename": "README.md",
   "release": {
-    "verifyConditions": "condition-circle",
-    "getLastRelease": "last-release-apm"
+    "extends": "@semantic-release/apm-config"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Adezandee/fast-eslint.git"
   },
   "scripts": {
-    "apm:publish": "apm publish -t v$npm_package_version",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "git:push": "git push",
-    "pregit:push": "git commit -am \"Prepare $npm_package_version release\"",
     "pretest": "eslint lib spec/*.js",
-    "semantic-release": "semantic-release pre && npm run changelog && npm install && npm run git:push && semantic-release post && npm run apm:publish",
     "test": "apm test"
   },
-  "version": "4.8.0",
+  "version": "4.9.0",
   "_atomModuleCache": {
     "version": 1,
     "dependencies": [
       {
         "name": "acorn",
-        "version": "5.4.1",
+        "version": "5.5.3",
         "path": "node_modules\\acorn\\dist\\acorn.js"
       },
       {
@@ -172,7 +160,7 @@
       },
       {
         "name": "ansi-escapes",
-        "version": "3.0.0",
+        "version": "3.1.0",
         "path": "node_modules\\ansi-escapes\\index.js"
       },
       {
@@ -187,7 +175,7 @@
       },
       {
         "name": "argparse",
-        "version": "1.0.9",
+        "version": "1.0.10",
         "path": "node_modules\\argparse\\index.js"
       },
       {
@@ -212,7 +200,7 @@
       },
       {
         "name": "atom-package-deps",
-        "version": "4.6.1",
+        "version": "4.6.2",
         "path": "node_modules\\atom-package-deps\\lib\\index.js"
       },
       {
@@ -246,6 +234,11 @@
         "path": "node_modules\\brace-expansion\\index.js"
       },
       {
+        "name": "buffer-from",
+        "version": "1.0.0",
+        "path": "node_modules\\buffer-from\\index.js"
+      },
+      {
         "name": "caller-path",
         "version": "0.1.0",
         "path": "node_modules\\caller-path\\index.js"
@@ -257,17 +250,17 @@
       },
       {
         "name": "chalk",
-        "version": "2.3.1",
+        "version": "2.3.2",
         "path": "node_modules\\chalk\\index.js"
       },
       {
         "name": "ansi-styles",
-        "version": "3.2.0",
+        "version": "3.2.1",
         "path": "node_modules\\chalk\\node_modules\\ansi-styles\\index.js"
       },
       {
         "name": "supports-color",
-        "version": "5.2.0",
+        "version": "5.3.0",
         "path": "node_modules\\chalk\\node_modules\\supports-color\\index.js"
       },
       {
@@ -312,7 +305,7 @@
       },
       {
         "name": "concat-stream",
-        "version": "1.6.0",
+        "version": "1.6.2",
         "path": "node_modules\\concat-stream\\index.js"
       },
       {
@@ -357,7 +350,7 @@
       },
       {
         "name": "eslint",
-        "version": "4.13.1",
+        "version": "4.19.1",
         "path": "node_modules\\eslint\\lib\\api.js"
       },
       {
@@ -366,8 +359,13 @@
         "path": "node_modules\\eslint-scope\\lib\\index.js"
       },
       {
+        "name": "eslint-visitor-keys",
+        "version": "1.0.0",
+        "path": "node_modules\\eslint-visitor-keys\\lib\\index.js"
+      },
+      {
         "name": "espree",
-        "version": "3.5.3",
+        "version": "3.5.4",
         "path": "node_modules\\espree\\espree.js"
       },
       {
@@ -377,12 +375,12 @@
       },
       {
         "name": "esquery",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "path": "node_modules\\esquery\\esquery.js"
       },
       {
         "name": "esrecurse",
-        "version": "4.2.0",
+        "version": "4.2.1",
         "path": "node_modules\\esrecurse\\esrecurse.js"
       },
       {
@@ -397,12 +395,12 @@
       },
       {
         "name": "external-editor",
-        "version": "2.1.0",
+        "version": "2.2.0",
         "path": "node_modules\\external-editor\\main\\index.js"
       },
       {
         "name": "fast-deep-equal",
-        "version": "1.0.0",
+        "version": "1.1.0",
         "path": "node_modules\\fast-deep-equal\\index.js"
       },
       {
@@ -447,7 +445,7 @@
       },
       {
         "name": "globals",
-        "version": "11.3.0",
+        "version": "11.4.0",
         "path": "node_modules\\globals\\index.js"
       },
       {
@@ -472,7 +470,7 @@
       },
       {
         "name": "iconv-lite",
-        "version": "0.4.19",
+        "version": "0.4.21",
         "path": "node_modules\\iconv-lite\\lib\\index.js"
       },
       {
@@ -512,7 +510,7 @@
       },
       {
         "name": "is-path-in-cwd",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "path": "node_modules\\is-path-in-cwd\\index.js"
       },
       {
@@ -552,7 +550,7 @@
       },
       {
         "name": "js-yaml",
-        "version": "3.10.0",
+        "version": "3.11.0",
         "path": "node_modules\\js-yaml\\index.js"
       },
       {
@@ -587,7 +585,7 @@
       },
       {
         "name": "lru-cache",
-        "version": "4.1.1",
+        "version": "4.1.2",
         "path": "node_modules\\lru-cache\\index.js"
       },
       {
@@ -707,8 +705,13 @@
       },
       {
         "name": "readable-stream",
-        "version": "2.3.4",
+        "version": "2.3.6",
         "path": "node_modules\\readable-stream\\readable.js"
+      },
+      {
+        "name": "regexpp",
+        "version": "1.1.0",
+        "path": "node_modules\\regexpp\\index.js"
       },
       {
         "name": "require-uncached",
@@ -749,6 +752,11 @@
         "name": "safe-buffer",
         "version": "5.1.1",
         "path": "node_modules\\safe-buffer\\index.js"
+      },
+      {
+        "name": "safer-buffer",
+        "version": "2.1.2",
+        "path": "node_modules\\safer-buffer\\safer.js"
       },
       {
         "name": "sb-callsite",
@@ -812,7 +820,7 @@
       },
       {
         "name": "string_decoder",
-        "version": "1.0.3",
+        "version": "1.1.1",
         "path": "node_modules\\string_decoder\\lib\\string_decoder.js"
       },
       {
@@ -936,6 +944,7 @@
         "node_modules\\babel-code-frame\\package.json",
         "node_modules\\balanced-match\\package.json",
         "node_modules\\brace-expansion\\package.json",
+        "node_modules\\buffer-from\\package.json",
         "node_modules\\caller-path\\package.json",
         "node_modules\\callsites\\package.json",
         "node_modules\\chalk\\node_modules\\ansi-styles\\package.json",
@@ -965,10 +974,11 @@
         "node_modules\\eslint\\conf\\replacements.json",
         "node_modules\\eslint\\package.json",
         "node_modules\\eslint-scope\\package.json",
+        "node_modules\\eslint-visitor-keys\\lib\\visitor-keys.json",
+        "node_modules\\eslint-visitor-keys\\package.json",
         "node_modules\\espree\\package.json",
         "node_modules\\esprima\\package.json",
         "node_modules\\esquery\\package.json",
-        "node_modules\\esrecurse\\package-lock.json",
         "node_modules\\esrecurse\\package.json",
         "node_modules\\estraverse\\package.json",
         "node_modules\\esutils\\package.json",
@@ -1048,6 +1058,7 @@
         "node_modules\\progress\\package.json",
         "node_modules\\pseudomap\\package.json",
         "node_modules\\readable-stream\\package.json",
+        "node_modules\\regexpp\\package.json",
         "node_modules\\require-uncached\\package.json",
         "node_modules\\resolve-from\\package.json",
         "node_modules\\restore-cursor\\package.json",
@@ -1056,6 +1067,7 @@
         "node_modules\\rx-lite\\package.json",
         "node_modules\\rx-lite-aggregates\\package.json",
         "node_modules\\safe-buffer\\package.json",
+        "node_modules\\safer-buffer\\package.json",
         "node_modules\\sb-callsite\\package.json",
         "node_modules\\sb-exec\\.eslintrc.json",
         "node_modules\\sb-exec\\package.json",
@@ -1255,6 +1267,8 @@
         "node_modules\\babel-code-frame\\node_modules\\strip-ansi\\index.js",
         "node_modules\\balanced-match\\index.js",
         "node_modules\\brace-expansion\\index.js",
+        "node_modules\\buffer-from\\index.js",
+        "node_modules\\buffer-from\\test.js",
         "node_modules\\caller-path\\index.js",
         "node_modules\\callsites\\index.js",
         "node_modules\\chalk\\index.js",
@@ -1311,7 +1325,6 @@
         "node_modules\\eslint\\bin\\eslint.js",
         "node_modules\\eslint\\conf\\config-schema.js",
         "node_modules\\eslint\\conf\\default-cli-options.js",
-        "node_modules\\eslint\\conf\\default-config-options.js",
         "node_modules\\eslint\\conf\\environments.js",
         "node_modules\\eslint\\conf\\eslint-all.js",
         "node_modules\\eslint\\conf\\eslint-recommended.js",
@@ -1634,6 +1647,7 @@
         "node_modules\\eslint\\lib\\util\\glob-util.js",
         "node_modules\\eslint\\lib\\util\\glob.js",
         "node_modules\\eslint\\lib\\util\\hash.js",
+        "node_modules\\eslint\\lib\\util\\interpolate.js",
         "node_modules\\eslint\\lib\\util\\keywords.js",
         "node_modules\\eslint\\lib\\util\\module-resolver.js",
         "node_modules\\eslint\\lib\\util\\naming.js",
@@ -1656,6 +1670,7 @@
         "node_modules\\eslint-scope\\lib\\scope-manager.js",
         "node_modules\\eslint-scope\\lib\\scope.js",
         "node_modules\\eslint-scope\\lib\\variable.js",
+        "node_modules\\eslint-visitor-keys\\lib\\index.js",
         "node_modules\\espree\\espree.js",
         "node_modules\\espree\\lib\\ast-node-types.js",
         "node_modules\\espree\\lib\\comment-attachment.js",
@@ -1682,7 +1697,6 @@
         "node_modules\\external-editor\\main\\errors\\ReadFileError.js",
         "node_modules\\external-editor\\main\\errors\\RemoveFileError.js",
         "node_modules\\external-editor\\main\\index.js",
-        "node_modules\\fast-deep-equal\\benchmark\\index.js",
         "node_modules\\fast-deep-equal\\index.js",
         "node_modules\\fast-json-stable-stringify\\benchmark\\index.js",
         "node_modules\\fast-json-stable-stringify\\example\\key_cmp.js",
@@ -2910,6 +2924,7 @@
         "node_modules\\readable-stream\\transform.js",
         "node_modules\\readable-stream\\writable-browser.js",
         "node_modules\\readable-stream\\writable.js",
+        "node_modules\\regexpp\\index.js",
         "node_modules\\require-uncached\\index.js",
         "node_modules\\resolve-from\\index.js",
         "node_modules\\restore-cursor\\index.js",
@@ -2922,6 +2937,9 @@
         "node_modules\\rx-lite-aggregates\\rx.lite.aggregates.min.js",
         "node_modules\\safe-buffer\\index.js",
         "node_modules\\safe-buffer\\test.js",
+        "node_modules\\safer-buffer\\dangerous.js",
+        "node_modules\\safer-buffer\\safer.js",
+        "node_modules\\safer-buffer\\tests.js",
         "node_modules\\sb-callsite\\lib\\main.js",
         "node_modules\\sb-exec\\lib\\helpers.js",
         "node_modules\\sb-exec\\lib\\index.js",
@@ -3010,8 +3028,8 @@
         ],
         "dependencies": {
           "atom-linter": "10.0.0",
-          "atom-package-deps": "4.6.1",
-          "eslint": "4.13.1",
+          "atom-package-deps": "4.6.2",
+          "eslint": "4.19.1",
           "loophole": "1.1.0"
         }
       },
@@ -3148,9 +3166,9 @@
           "node_modules\\chalk"
         ],
         "dependencies": {
-          "ansi-styles": "^3.2.0",
+          "ansi-styles": "^3.2.1",
           "escape-string-regexp": "^1.0.5",
-          "supports-color": "^5.2.0"
+          "supports-color": "^5.3.0"
         }
       },
       {
@@ -3190,6 +3208,7 @@
           "node_modules\\concat-stream"
         ],
         "dependencies": {
+          "buffer-from": "^1.0.0",
           "inherits": "^2.0.3",
           "readable-stream": "^2.2.2",
           "typedarray": "^0.0.6"
@@ -3269,12 +3288,12 @@
           "chalk": "^2.1.0",
           "concat-stream": "^1.6.0",
           "cross-spawn": "^5.1.0",
-          "debug": "^3.0.1",
-          "doctrine": "^2.0.2",
+          "debug": "^3.1.0",
+          "doctrine": "^2.1.0",
           "eslint-scope": "^3.7.1",
-          "espree": "^3.5.2",
+          "eslint-visitor-keys": "^1.0.0",
+          "espree": "^3.5.4",
           "esquery": "^1.0.0",
-          "estraverse": "^4.2.0",
           "esutils": "^2.0.2",
           "file-entry-cache": "^2.0.0",
           "functional-red-black-tree": "^1.0.1",
@@ -3295,11 +3314,12 @@
           "path-is-inside": "^1.0.2",
           "pluralize": "^7.0.0",
           "progress": "^2.0.0",
+          "regexpp": "^1.0.1",
           "require-uncached": "^1.0.3",
           "semver": "^5.3.0",
           "strip-ansi": "^4.0.0",
           "strip-json-comments": "~2.0.1",
-          "table": "^4.0.1",
+          "table": "4.0.2",
           "text-table": "~0.2.0"
         }
       },
@@ -3319,7 +3339,7 @@
           "node_modules\\espree\\lib"
         ],
         "dependencies": {
-          "acorn": "^5.4.0",
+          "acorn": "^5.5.0",
           "acorn-jsx": "^3.0.0"
         }
       },
@@ -3336,8 +3356,7 @@
           "node_modules\\esrecurse"
         ],
         "dependencies": {
-          "estraverse": "^4.1.0",
-          "object-assign": "^4.0.1"
+          "estraverse": "^4.1.0"
         }
       },
       {
@@ -3412,6 +3431,17 @@
         ],
         "dependencies": {
           "ansi-regex": "^2.0.0"
+        }
+      },
+      {
+        "paths": [
+          "node_modules\\iconv-lite\\encodings",
+          "node_modules\\iconv-lite\\encodings\\tables",
+          "node_modules\\iconv-lite\\lib",
+          "node_modules\\iconv-lite"
+        ],
+        "dependencies": {
+          "safer-buffer": "^2.1.0"
         }
       },
       {
@@ -3569,7 +3599,7 @@
           "isarray": "~1.0.0",
           "process-nextick-args": "~2.0.0",
           "safe-buffer": "~5.1.1",
-          "string_decoder": "~1.0.3",
+          "string_decoder": "~1.1.1",
           "util-deprecate": "~1.0.1"
         }
       },

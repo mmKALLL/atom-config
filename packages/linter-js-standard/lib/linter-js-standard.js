@@ -5,21 +5,24 @@ var markdownSplitter = require('./utils/markdown-splitter')
 var htmlSplitter = require('./utils/html-splitter')
 var selectStyle = require('./utils/select-style')
 var styleSettings = require('./utils/style-settings')
-var Q = require('q')
 
 function generateLintPromise (textEditor, filePath, fileContent, settings, lineStart) {
   return allowUnsafeNewFunction(function () {
-    var deferred = Q.defer()
-    var boundLinter = linter.bind({
-      textEditor: textEditor,
-      filePath: filePath,
-      deferred: deferred,
-      lineStart: lineStart || 0
+    return new Promise((resolve, reject) => {
+      var boundLinter = linter.bind({
+        textEditor: textEditor,
+        filePath: filePath,
+        lineStart: lineStart || 0
+      })
+
+      settings.style.lintText(fileContent, settings.opts, (err, results) => {
+        if (err) {
+          return reject(err)
+        }
+
+        resolve(boundLinter(results))
+      })
     })
-
-    settings.style.lintText(fileContent, settings.opts, boundLinter)
-
-    return deferred.promise
   })
 }
 
@@ -30,6 +33,8 @@ module.exports = function (textEditor) {
   var config = atom.config.get('linter-js-standard')
 
   var opts = config.honorStyleSettings ? styleSettings.checkStyleSettings(filePath, textEditor) : {}
+
+  opts.filename = filePath
 
   var style = selectStyle(filePath, {
     style: opts.style || config.style,
@@ -67,8 +72,8 @@ module.exports = function (textEditor) {
     lintPromises.push(generateLintPromise(textEditor, filePath, fileContent, settings))
   }
 
-  return Q.allSettled(lintPromises)
-    .then(function (results) {
+  return Promise.all(lintPromises)
+    .then(function (values) {
       if (textEditor.getText() !== fileContent) {
         // When the editor’s contents have been modified since we’ve started
         // linting, we can’t be sure that the results are still valid.
@@ -78,12 +83,8 @@ module.exports = function (textEditor) {
 
       var occurrences = []
 
-      results.forEach(function (result) {
-        if (result.state === 'rejected') {
-          throw result.reason
-        }
-
-        occurrences = occurrences.concat(result.value)
+      values.forEach(function (value) {
+        occurrences = occurrences.concat(value)
       })
 
       return occurrences

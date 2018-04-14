@@ -12,7 +12,6 @@
     useCoreMovementCommands: false
   core:
     allowPendingPaneItems: false
-    automaticallyUpdate: false
     disabledPackages: [
       "project-manager"
       "fast-eslint"
@@ -51,6 +50,23 @@
     showEslintRules: true
   "linter-ui-default":
     showPanel: true
+  minimap:
+    plugins:
+      cursorline: true
+      cursorlineDecorationsZIndex: 0
+      "find-and-replace": true
+      "find-and-replaceDecorationsZIndex": 0
+      "git-diff": true
+      "git-diffDecorationsZIndex": 0
+      "highlight-selected": true
+      "highlight-selectedDecorationsZIndex": 0
+      linter: true
+      linterDecorationsZIndex: 0
+      selection: true
+      selectionDecorationsZIndex: 0
+    redrawDelay: 300
+  "minimap-git-diff":
+    useGutterDecoration: true
   "one-dark-ui": {}
   "tree-view":
     hideVcsIgnoredFiles: true
@@ -87,6 +103,9 @@
 ".java.source":
   editor:
     tabLength: 4
+".js.source":
+  editor:
+    tabLength: 2
 ".python.source":
   editor:
     tabLength: 4

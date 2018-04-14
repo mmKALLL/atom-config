@@ -16,13 +16,13 @@
 <h4 align="center">Un solo Stile JavaScript per domarli tutti</h4>
 
 <p align="center">
-  <a href="README-en.md">English</a> •
-  <a href="README-esla.md">Español (Latinoamérica)</a> •
-  <a href="README-iteu.md">Italiano (Italian)</a> •
-  <a href="README-kokr.md">한국어 (Korean)</a> •
-  <a href="README-ptbr.md">Português (Brasil)</a> •
-  <a href="README-zhcn.md">简体中文 (Simplified Chinese)</a> •
-  <a href="README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
+  <a href="/docs/README-en.md">English</a> •
+  <a href="/docs/README-esla.md">Español (Latinoamérica)</a> •
+  <a href="/docs/README-iteu.md">Italiano (Italian)</a> •
+  <a href="/docs/README-kokr.md">한국어 (Korean)</a> •
+  <a href="/docs/README-ptbr.md">Português (Brasil)</a> •
+  <a href="/docs/README-zhcn.md">简体中文 (Simplified Chinese)</a> •
+  <a href="/docs/README-zhtw.md">繁體中文 (Taiwanese Mandarin)</a>
 </p>
 
 <br>
@@ -185,7 +185,6 @@ Questo modulo fa risparmiare tempo a te (e altri!) in tre modi:
 
 Un sacco di gente!
 
-
 [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/npm.png>](https://www.npmjs.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/github.png>](https://github.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/opbeat.png>](https://opbeat.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/nearform.png>](http://www.nearform.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/brave.png>](https://www.brave.com) |
 |---|---|---|---|---|
 
@@ -202,6 +201,9 @@ Un sacco di gente!
 |---|---|---|---|---|
 
 [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/nodesource.png>](https://nodesource.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/greenkeeper.png>](https://greenkeeper.io) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/karma.png>](https://karma-runner.github.io) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/taser.png>](https://www.taser.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/neo4j.png>](https://www.neo4j.com) |
+|---|---|---|---|---|
+
+[<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/rentograph.png>](https://rentograph.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/eaze.png>](https://www.eaze.com) | [<img width=150 src=https://cdn.rawgit.com/standard/standard/master/docs/logos/ctrl-alt-deseat.png>](https://www.ctrlaltdeseat.com) | | |
 |---|---|---|---|---|
 
 
@@ -547,13 +549,23 @@ $ standard --plugin html '**/*.html'
 
 Divertente!
 
-```sh
-#!/bin/sh
-#Assicurati che tutti i file javascript pronti per il commit passano lo standard code style
-git diff --name-only --cached --relative | grep '\.jsx\?$' | xargs standard
-if [ $? -ne 0 ]; then exit 1; fi
-```
+```bash
+#!/bin/bash
 
+#Assicurati che tutti i file javascript pronti per il commit passano lo standard code style
+function xargs-r() {
+  # Portable version of "xargs -r". The -r flag is a GNU extension that
+  # prevents xargs from running if there are no input files.
+  if IFS= read -r -d '' path; then
+    { echo -n "$path"; echo -ne "\0"; cat; } | xargs $@
+  fi
+}
+git diff -z --name-only --cached --relative | grep -z '\.jsx\?$' | xargs-r -0 -t standard
+if [[ $? -ne 0 ]]; then
+  echo 'JavaScript Standard Style errors were detected. Aborting commit.'
+  exit 1
+fi
+```
 
 ## Come posso mostrare l'output del mio codice colorato e *carino*?
 
