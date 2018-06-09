@@ -1,15 +1,21 @@
 "use babel";
 
 import React from "react";
-import { shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 import store from "../../lib/store";
+import KernelTransport from "../../lib/kernel-transport";
+import Kernel from "../../lib/kernel";
 import StatusBar from "../../lib/components/status-bar";
 
 describe("Status Bar", () => {
   it("should render status bar and call onClick if clicked", () => {
     const mockStore = {
-      kernel: { displayName: "Foo Kernel", executionState: "idle" }
+      kernel: { displayName: "Foo Kernel", executionState: "idle" },
+      configMapping: new Map()
     };
     const onClick = jasmine.createSpy("onClick");
     const component = shallow(
@@ -39,46 +45,70 @@ describe("Status Bar", () => {
     expect(component.type()).toBeNull();
     expect(component.text()).toBe("");
 
-    // with kernel
-    const editor = atom.workspace.buildTextEditor();
-    store.updateEditor(editor);
-    expect(store.editor).toBe(editor);
-
-    const grammar = editor.getGrammar();
-    expect(grammar.name).toBe("Null Grammar");
-
-    const kernelSpec = {
-      language: "null grammar",
-      display_name: "Null Kernel"
-    };
-    const kernel = {
-      kernelSpec: kernelSpec,
-      language: kernelSpec.language.toLowerCase(),
-      displayName: kernelSpec.display_name,
-      executionState: "starting"
-    };
-    store.newKernel(kernel);
-    expect(store.runningKernels.toJS()["null grammar"]).toEqual(kernel);
-    expect(store.kernel.kernelSpec.language).toBe(kernel.kernelSpec.language);
-    expect(store.kernel.kernelSpec.display_name).toBe(
-      kernel.kernelSpec.display_name
+    const kernel = new Kernel(
+      new KernelTransport({
+        display_name: "Python 3",
+        language: "python"
+      })
     );
-    expect(store.kernel.language).toBe(kernel.language);
+    kernel.setExecutionState("starting");
+
+    const kernel2 = new Kernel(
+      new KernelTransport({
+        display_name: "Javascript",
+        language: "Javascript"
+      })
+    );
+    kernel2.setExecutionState("idle");
+
+    store.kernelMapping = new Map([
+      ["foo.py", kernel],
+      ["bar.py", kernel],
+      ["foo.js", kernel2]
+    ]);
+
+    store.editor = { getPath: () => "foo.py" };
+
+    // FixMe: Enzyme https://github.com/airbnb/enzyme/issues/1184
+    component.setState();
     expect(store.kernel.displayName).toBe(kernel.displayName);
     expect(store.kernel.executionState).toBe(kernel.executionState);
-    expect(StatusBar.prototype.render).toHaveBeenCalledTimes(2);
-    expect(component.text()).toBe("Null Kernel | starting");
-
-    // doesn't update if switched to editor with same grammar
-    store.updateEditor(atom.workspace.buildTextEditor());
-    expect(StatusBar.prototype.render).toHaveBeenCalledTimes(2);
+    // expect(StatusBar.prototype.render).toHaveBeenCalledTimes(2);
+    expect(component.text()).toBe("Python 3 | starting");
 
     // update execution state
-    store.kernel.executionState = "idle";
-    expect(StatusBar.prototype.render).toHaveBeenCalledTimes(3);
-    expect(component.text()).toBe("Null Kernel | idle");
+    store.kernel.setExecutionState("idle");
 
-    // reset store
-    store.runningKernels = new Map();
+    // FixMe: Enzyme https://github.com/airbnb/enzyme/issues/1184
+    component.setState();
+    // expect(StatusBar.prototype.render).toHaveBeenCalledTimes(3);
+    expect(component.text()).toBe("Python 3 | idle");
+
+    // doesn't update if switched to editor with same grammar
+    store.editor = { getPath: () => "bar.py" };
+    // expect(StatusBar.prototype.render).toHaveBeenCalledTimes(3);
+
+    // update kernel
+    store.editor = { getPath: () => "foo.js" };
+
+    // FixMe: Enzyme https://github.com/airbnb/enzyme/issues/1184
+    component.setState();
+    expect(store.kernel.displayName).toBe(kernel2.displayName);
+    expect(store.kernel.executionState).toBe(kernel2.executionState);
+    // expect(StatusBar.prototype.render).toHaveBeenCalledTimes(4);
+    expect(component.text()).toBe("Javascript | idle");
+  });
+
+  it("hides the component based on config setting", () => {
+    store.setConfigValue("Hydrogen.statusBarDisable", true);
+    expect(store.kernel).toBeDefined();
+    const component = shallow(<StatusBar store={store} onClick={() => {}} />);
+
+    expect(component.text()).toBe("");
+    store.setConfigValue("Hydrogen.statusBarDisable", false);
+    expect(component.text()).not.toBe("Javascript | idle");
   });
 });
+
+// reset store
+store.kernelMapping = new Map();

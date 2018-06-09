@@ -34,6 +34,13 @@ When you place the cursor inside a cell and hit **"Run Cell"**, Hydrogen will ex
 ## "Hydrogen: Run All" and "Hydrogen: Run All Above"
 These commands will run all code inside the editor or all code above the cursor.
 
+## "Hydrogen: Toggle Output Area"
+An external output area can be used to display output instead of the inline result view. 
+The output can be displayed either in a scrolling view or a sliding history.
+
+<img width=560 src=https://user-images.githubusercontent.com/13436188/31737963-799d2ad2-b449-11e7-9b4c-78e51851e204.gif>
+
+
 
 ## "Hydrogen: Restart Kernel And Re Evaluate Bubbles"
 
@@ -45,7 +52,7 @@ This command works in following way.
 
 ## "Hydrogen: Toggle Bubble"
 
-Toggle(add or remove) bobble at current cursor line.
+Toggle(add or remove) bubble at current cursor line.
 You can **preset** bubble before executing code.
 If executed with selection, toggle bubble on each selected line.
 
@@ -88,7 +95,9 @@ You can also access these commands by clicking on the kernel status in the statu
 
 <img src="https://cloud.githubusercontent.com/assets/13285808/16894732/e4e5b4de-4b5f-11e6-8b8e-facf17a7c6c4.png" width=300>
 
-Additionally, if you have two or more kernels for a particular language (grammar), you can select which kernel to use with the "Switch to <kernel>" option in the Kernel Commands menu.
+Additionally, if you have more kernels running, you can open the kernel monitor via **Hydrogen: Toggle Kernel Monitor** to see a list of all running kernels and shut them down if needed:
+
+<img width="802" alt="monitor" src="https://user-images.githubusercontent.com/13285808/30815792-7b685b8a-a214-11e7-863e-f334f03eef0f.png">
 
 ## Multiple kernels inside one rich document
 

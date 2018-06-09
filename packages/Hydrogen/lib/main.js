@@ -14,6 +14,7 @@ import React from "react";
 
 import KernelPicker from "./kernel-picker";
 import WSKernelPicker from "./ws-kernel-picker";
+import ExistingKernelPicker from "./existing-kernel-picker";
 import SignalListView from "./signal-list-view";
 import * as codeManager from "./code-manager";
 
@@ -24,6 +25,7 @@ import StatusBar from "./components/status-bar";
 import InspectorPane from "./panes/inspector";
 import WatchesPane from "./panes/watches";
 import OutputPane from "./panes/output-area";
+import KernelMonitorPane from "./panes/kernel-monitor";
 
 import { toggleInspector } from "./commands";
 
@@ -34,22 +36,25 @@ import Config from "./config";
 import kernelManager from "./kernel-manager";
 import ZMQKernel from "./zmq-kernel";
 import WSKernel from "./ws-kernel";
+import Kernel from "./kernel";
 import AutocompleteProvider from "./autocomplete-provider";
 import HydrogenProvider from "./plugin-api/hydrogen-provider";
+
 import {
   log,
-  focus,
   reactFactory,
   isMultilanguageGrammar,
   renderDevTools,
   INSPECTOR_URI,
   WATCHES_URI,
   OUTPUT_AREA_URI,
+  KERNEL_MONITOR_URI,
   hotReloadPackage,
-  openOrShowDock
+  openOrShowDock,
+  kernelSpecProvidesGrammar
 } from "./utils";
 
-import type Kernel from "./kernel";
+import exportNotebook from "./export-notebook";
 
 const Hydrogen = {
   config: Config.schema,
@@ -67,7 +72,7 @@ const Hydrogen = {
             return;
           }
 
-          if (store.runningKernels.size != 0) {
+          if (store.runningKernels.length != 0) {
             skipLanguageMappingsChange = true;
 
             atom.config.set("Hydrogen.languageMappings", oldValue);
@@ -90,6 +95,12 @@ const Hydrogen = {
     );
 
     store.subscriptions.add(
+      atom.config.observe("Hydrogen.statusBarDisable", newValue => {
+        store.setConfigValue("Hydrogen.statusBarDisable", Boolean(newValue));
+      })
+    );
+
+    store.subscriptions.add(
       atom.commands.add("atom-text-editor:not([mini])", {
         "hydrogen:run": () => this.run(),
         "hydrogen:run-all": () => this.runAll(),
@@ -100,8 +111,12 @@ const Hydrogen = {
         "hydrogen:toggle-watches": () => atom.workspace.toggle(WATCHES_URI),
         "hydrogen:toggle-output-area": () =>
           atom.workspace.toggle(OUTPUT_AREA_URI),
-        "hydrogen:select-kernel": () => this.showKernelPicker(),
-        "hydrogen:connect-to-remote-kernel": () => this.showWSKernelPicker(),
+        "hydrogen:toggle-kernel-monitor": () =>
+          atom.workspace.toggle(KERNEL_MONITOR_URI),
+        "hydrogen:start-local-kernel": () => this.startZMQKernel(),
+        "hydrogen:connect-to-remote-kernel": () => this.connectToWSKernel(),
+        "hydrogen:connect-to-existing-kernel": () =>
+          this.connectToExistingKernel(),
         "hydrogen:add-watch": () => {
           if (store.kernel) {
             store.kernel.watchesStore.addWatchFromEditor(store.editor);
@@ -124,13 +139,18 @@ const Hydrogen = {
           this.restartKernelAndReEvaluateBubbles(),
         "hydrogen:shutdown-kernel": () =>
           this.handleKernelCommand({ command: "shutdown-kernel" }),
-        "hydrogen:toggle-bubble": () => this.toggleBubble()
+        "hydrogen:toggle-bubble": () => this.toggleBubble(),
+        "hydrogen:export-notebook": () => exportNotebook()
       })
     );
 
     store.subscriptions.add(
       atom.commands.add("atom-workspace", {
-        "hydrogen:clear-results": () => store.markers.clear()
+        "hydrogen:clear-results": () => {
+          store.markers.clear();
+          if (!store.kernel) return;
+          store.kernel.outputStore.clear();
+        }
       })
     );
 
@@ -143,8 +163,8 @@ const Hydrogen = {
     }
 
     store.subscriptions.add(
-      atom.workspace.getCenter().observeActivePaneItem(item => {
-        store.updateEditor(item instanceof TextEditor ? item : null);
+      atom.workspace.observeActiveTextEditor(editor => {
+        store.updateEditor(editor);
       })
     );
 
@@ -173,6 +193,10 @@ const Hydrogen = {
           })
         );
 
+        editorSubscriptions.add(
+          editor.onDidChangeTitle(newTitle => store.forceEditorUpdate())
+        );
+
         store.subscriptions.add(editorSubscriptions);
       })
     );
@@ -188,6 +212,8 @@ const Hydrogen = {
             return new WatchesPane(store);
           case OUTPUT_AREA_URI:
             return new OutputPane(store);
+          case KERNEL_MONITOR_URI:
+            return new KernelMonitorPane(store);
         }
       })
     );
@@ -199,7 +225,8 @@ const Hydrogen = {
           if (
             item instanceof InspectorPane ||
             item instanceof WatchesPane ||
-            item instanceof OutputPane
+            item instanceof OutputPane ||
+            item instanceof KernelMonitorPane
           ) {
             item.destroy();
           }
@@ -256,12 +283,17 @@ const Hydrogen = {
   showKernelCommands() {
     if (!this.signalListView) {
       this.signalListView = new SignalListView();
-      this.signalListView.onConfirmed = (kernelCommand: {
-        command: string,
-        payload: ?Kernelspec
-      }) => this.handleKernelCommand(kernelCommand);
+      this.signalListView.onConfirmed = (kernelCommand: { command: string }) =>
+        this.handleKernelCommand(kernelCommand);
     }
     this.signalListView.toggle();
+  },
+
+  connectToExistingKernel() {
+    if (!this.existingKernelPicker) {
+      this.existingKernelPicker = new ExistingKernelPicker();
+    }
+    this.existingKernelPicker.toggle();
   },
 
   handleKernelCommand({
@@ -280,14 +312,6 @@ const Hydrogen = {
       return;
     }
 
-    if (command === "switch-kernel") {
-      if (!payload) return;
-      store.markers.clear();
-      if (kernel) kernel.destroy();
-      kernelManager.startKernel(payload, grammar);
-      return;
-    }
-
     if (!kernel) {
       const message = `No running kernel for grammar \`${grammar.name}\` found`;
       atom.notifications.addError(message);
@@ -303,9 +327,11 @@ const Hydrogen = {
       // Note that destroy alone does not shut down a WSKernel
       kernel.shutdown();
       kernel.destroy();
-    } else if (command === "rename-kernel" && kernel.promptRename) {
-      // $FlowFixMe Will only be called if remote kernel
-      if (kernel instanceof WSKernel) kernel.promptRename();
+    } else if (
+      command === "rename-kernel" &&
+      kernel.transport instanceof WSKernel
+    ) {
+      kernel.transport.promptRename();
     } else if (command === "disconnect-kernel") {
       store.markers.clear();
       kernel.destroy();
@@ -313,16 +339,27 @@ const Hydrogen = {
   },
 
   createResultBubble(editor: atom$TextEditor, code: string, row: number) {
-    if (!store.grammar) return;
+    const { grammar, filePath, kernel } = store;
 
-    if (store.kernel) {
-      this._createResultBubble(editor, store.kernel, code, row);
+    if (!filePath || !grammar) {
+      return atom.notifications.addError(
+        "Your file must be saved in order to start a kernel"
+      );
+    }
+
+    if (kernel) {
+      this._createResultBubble(editor, kernel, code, row);
       return;
     }
 
-    kernelManager.startKernelFor(store.grammar, editor, (kernel: ZMQKernel) => {
-      this._createResultBubble(editor, kernel, code, row);
-    });
+    kernelManager.startKernelFor(
+      grammar,
+      editor,
+      filePath,
+      (kernel: ZMQKernel) => {
+        this._createResultBubble(editor, kernel, code, row);
+      }
+    );
   },
 
   _createResultBubble(
@@ -335,11 +372,13 @@ const Hydrogen = {
       kernel.watchesStore.run();
       return;
     }
-    const globalOutputStore = atom.workspace
-      .getPaneItems()
-      .find(item => item instanceof OutputPane)
-      ? kernel.outputStore
-      : null;
+    const globalOutputStore =
+      atom.config.get("Hydrogen.outputAreaDefault") ||
+      atom.workspace.getPaneItems().find(item => item instanceof OutputPane)
+        ? kernel.outputStore
+        : null;
+
+    if (globalOutputStore) openOrShowDock(OUTPUT_AREA_URI);
 
     const { outputStore } = new ResultView(
       store.markers,
@@ -349,23 +388,9 @@ const Hydrogen = {
       !globalOutputStore
     );
 
-    kernel.execute(code, async result => {
+    kernel.execute(code, result => {
       outputStore.appendOutput(result);
-      if (globalOutputStore) {
-        globalOutputStore.appendOutput(result);
-
-        if (store.kernel !== kernel) return;
-
-        const container = atom.workspace.paneContainerForURI(OUTPUT_AREA_URI);
-        const pane = atom.workspace.paneForURI(OUTPUT_AREA_URI);
-        if (
-          (container && container.isVisible && !container.isVisible()) ||
-          (pane && pane.itemForURI(OUTPUT_AREA_URI) !== pane.getActiveItem())
-        ) {
-          await atom.workspace.open(OUTPUT_AREA_URI, { searchAllPanes: true });
-          focus(store.editor);
-        }
-      }
+      if (globalOutputStore) globalOutputStore.appendOutput(result);
     });
   },
 
@@ -424,8 +449,8 @@ const Hydrogen = {
   },
 
   runAll(breakpoints: ?Array<atom$Point>) {
-    const { editor, kernel, grammar } = store;
-    if (!editor || !grammar) return;
+    const { editor, kernel, grammar, filePath } = store;
+    if (!editor || !grammar || !filePath) return;
     if (isMultilanguageGrammar(editor.getGrammar())) {
       atom.notifications.addError(
         '"Run All" is not supported for this file type!'
@@ -438,9 +463,14 @@ const Hydrogen = {
       return;
     }
 
-    kernelManager.startKernelFor(grammar, editor, (kernel: ZMQKernel) => {
-      this._runAll(editor, kernel, breakpoints);
-    });
+    kernelManager.startKernelFor(
+      grammar,
+      editor,
+      filePath,
+      (kernel: ZMQKernel) => {
+        this._runAll(editor, kernel, breakpoints);
+      }
+    );
   },
 
   _runAll(
@@ -493,37 +523,44 @@ const Hydrogen = {
     }
   },
 
-  showKernelPicker() {
-    kernelManager.getAllKernelSpecsForGrammar(store.grammar, kernelSpecs => {
-      if (this.kernelPicker) {
-        this.kernelPicker.kernelSpecs = kernelSpecs;
-      } else {
-        this.kernelPicker = new KernelPicker(kernelSpecs);
+  startZMQKernel() {
+    kernelManager
+      .getAllKernelSpecsForGrammar(store.grammar)
+      .then(kernelSpecs => {
+        if (this.kernelPicker) {
+          this.kernelPicker.kernelSpecs = kernelSpecs;
+        } else {
+          this.kernelPicker = new KernelPicker(kernelSpecs);
 
-        this.kernelPicker.onConfirmed = (kernelSpec: Kernelspec) =>
-          this.handleKernelCommand({
-            command: "switch-kernel",
-            payload: kernelSpec
-          });
-      }
+          this.kernelPicker.onConfirmed = (kernelSpec: Kernelspec) => {
+            const { editor, grammar, filePath } = store;
+            if (!editor || !grammar || !filePath) return;
+            store.markers.clear();
 
-      this.kernelPicker.toggle();
-    });
+            kernelManager.startKernel(kernelSpec, grammar, editor, filePath);
+          };
+        }
+
+        this.kernelPicker.toggle();
+      });
   },
 
-  showWSKernelPicker() {
+  connectToWSKernel() {
     if (!this.wsKernelPicker) {
-      this.wsKernelPicker = new WSKernelPicker((kernel: Kernel) => {
+      this.wsKernelPicker = new WSKernelPicker((transport: WSKernel) => {
+        const kernel = new Kernel(transport);
         store.markers.clear();
+        const { editor, grammar, filePath } = store;
+        if (!editor || !grammar || !filePath) return;
 
-        if (kernel instanceof ZMQKernel) kernel.destroy();
+        if (kernel.transport instanceof ZMQKernel) kernel.destroy();
 
-        store.newKernel(kernel);
+        store.newKernel(kernel, filePath, editor, grammar);
       });
     }
 
     this.wsKernelPicker.toggle((kernelSpec: Kernelspec) =>
-      kernelManager.kernelSpecProvidesGrammar(kernelSpec, store.grammar)
+      kernelSpecProvidesGrammar(kernelSpec, store.grammar)
     );
   }
 };

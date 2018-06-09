@@ -24,9 +24,19 @@ const Inspector = observer(({ store: { kernel } }: Props) => {
   const mimetype = richestMimetype(bundle, displayOrder, transforms);
 
   if (!mimetype) return hide();
-  // $FlowFixMe React element `Transform`. Expected React component instead of Transform
   const Transform = transforms[mimetype];
-  return <Transform data={bundle[mimetype]} />;
+  return (
+    <div
+      className="native-key-bindings"
+      tabIndex="-1"
+      style={{
+        fontSize: atom.config.get(`Hydrogen.outputAreaFontSize`) || "inherit"
+      }}
+    >
+      {/* $FlowFixMe React element `Transform`. Expected React component instead of Transform*/}
+      <Transform data={bundle[mimetype]} />
+    </div>
+  );
 });
 
 export default Inspector;

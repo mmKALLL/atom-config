@@ -4,15 +4,15 @@ import { CompositeDisposable } from "atom";
 import React from "react";
 import { observer } from "mobx-react";
 import { action, observable, toJS } from "mobx";
-import Display, {
-  DEFAULT_SCROLL_HEIGHT
-} from "@nteract/display-area/lib/display";
+import { Display } from "@nteract/display-area";
 import { transforms, displayOrder } from "./transforms";
 import Status from "./status";
 
 import type { IObservableValue } from "mobx";
 import type OutputStore from "./../../store/output";
 import type Kernel from "./../../kernel";
+
+const SCROLL_HEIGHT = 600;
 
 type Props = {
   store: OutputStore,
@@ -27,7 +27,7 @@ class ResultViewComponent extends React.Component<Props> {
   containerTooltip = new CompositeDisposable();
   buttonTooltip = new CompositeDisposable();
   closeTooltip = new CompositeDisposable();
-  expanded: IObservableValue<boolean> = observable(false);
+  expanded: IObservableValue<boolean> = observable.box(false);
 
   getAllText = () => {
     if (!this.el) return "";
@@ -56,9 +56,9 @@ class ResultViewComponent extends React.Component<Props> {
     comp.add(
       atom.tooltips.add(element, {
         title: `Click to copy,
-          ${process.platform === "darwin"
-            ? "Cmd"
-            : "Ctrl"}+Click to open in editor`
+          ${
+            process.platform === "darwin" ? "Cmd" : "Ctrl"
+          }+Click to open in editor`
       })
     );
   };
@@ -114,13 +114,9 @@ class ResultViewComponent extends React.Component<Props> {
       return (
         <Status
           status={
-            kernel &&
-            kernel.executionState !== "busy" &&
-            status === "running" ? (
-              "error"
-            ) : (
-              status
-            )
+            kernel && kernel.executionState !== "busy" && status === "running"
+              ? "error"
+              : status
           }
           style={inlineStyle}
         />
@@ -130,40 +126,49 @@ class ResultViewComponent extends React.Component<Props> {
     return (
       <div
         className={isPlain ? "inline-container" : "multiline-container"}
-        onClick={isPlain ? this.handleClick : false}
+        onClick={isPlain ? this.handleClick : undefined}
         style={
-          isPlain ? (
-            inlineStyle
-          ) : (
-            { maxWidth: `${position.editorWidth}ch`, margin: "0px" }
-          )
+          isPlain
+            ? inlineStyle
+            : {
+                maxWidth: `${position.editorWidth - 2 * position.charWidth}px`,
+                margin: "0px"
+              }
         }
       >
-        <Display
+        <div
+          className="hydrogen_cell_display"
           ref={ref => {
-            if (!ref || !ref.el) return;
-            this.el = ref.el;
+            if (!ref) return;
+            this.el = ref;
 
             isPlain
-              ? this.addCopyTooltip(ref.el, this.containerTooltip)
+              ? this.addCopyTooltip(ref, this.containerTooltip)
               : this.containerTooltip.dispose();
 
-            // React's event handler doesn't properly handle event.stopPropagation() for
-            // events outside the React context. Using proxy.el saves us a extra div.
-            // We only need this in the text editor, therefore we check showStatus.
-            if (!this.expanded.get() && !isPlain && ref.el) {
-              ref.el.addEventListener("wheel", this.onWheel(ref.el), {
+            // As of this writing React's event handler doesn't properly handle
+            // event.stopPropagation() for events outside the React context.
+            if (!this.expanded.get() && !isPlain && ref) {
+              ref.addEventListener("wheel", this.onWheel(ref), {
                 passive: true
               });
             }
           }}
-          outputs={toJS(outputs)}
-          displayOrder={displayOrder}
-          transforms={transforms}
-          theme="light"
-          models={{}}
-          expanded={this.expanded.get()}
-        />
+          style={{
+            maxHeight: this.expanded.get() ? "100%" : `${SCROLL_HEIGHT}px`,
+            overflowY: "auto"
+          }}
+        >
+          <Display
+            // $FlowFixMe
+            outputs={toJS(outputs)}
+            displayOrder={displayOrder}
+            transforms={transforms}
+            theme="light"
+            models={{}}
+            expanded
+          />
+        </div>
         {isPlain ? null : (
           <div className="toolbar">
             <div
@@ -182,11 +187,11 @@ class ResultViewComponent extends React.Component<Props> {
               />
             ) : null}
 
-            {this.el && this.el.scrollHeight > DEFAULT_SCROLL_HEIGHT ? (
+            {this.el && this.el.scrollHeight > SCROLL_HEIGHT ? (
               <div
-                className={`icon icon-${this.expanded.get()
-                  ? "fold"
-                  : "unfold"}`}
+                className={`icon icon-${
+                  this.expanded.get() ? "fold" : "unfold"
+                }`}
                 onClick={this.toggleExpand}
               />
             ) : null}

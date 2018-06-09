@@ -18,40 +18,6 @@ Please, also include the output or a screenshot of the debug messages. To access
 
 ## Common Issues
 
-### Debian 8 and Ubuntu 16.04 LTS
-
-Unfortunately, the versions of IPython provided in Debian's and Ubuntu's
-repositories are rather old and Hydrogen is unable to detect the kernel specs
-installed in your machine. To workaround this issue, Hydrogen provides the
-setting `KernelSpec`, where the user can declare the kernel specs manually.
-Find the `KernelSpec` setting in the Atom GUI by going to the Settings pane,
-click Packages, search for Hydrogen, and click the Hydrogen Settings button.
-
-Below is an example `KernelSpec` for IPython 2 and 3:
-
-```json
-{
-  "kernelspecs": {
-    "python2": {
-      "spec": {
-        "display_name": "Python 2",
-        "language": "python",
-        "argv": ["python2.7", "-m", "ipykernel", "-f", "{connection_file}"],
-        "env": {}
-      }
-    },
-    "python3": {
-      "spec": {
-        "display_name": "Python 3",
-        "language": "python",
-        "argv": ["python3.4", "-m", "ipykernel", "-f", "{connection_file}"],
-        "env": {}
-      }
-    }
-  }
-}
-```
-
 ### Installation fails on Linux 32-bit
 
 At the moment we don't ship prebuilts for 32-bit Linux. Hence you'll need some additional toolling to build from source:
@@ -64,13 +30,9 @@ Use your distribution's package manager to install.
 
 If your default `python` is 3.x, you need to run instead `PYTHON=python2.7 apm install hydrogen` or change the default version for `apm` with `apm config set python $(which python2.7)` beforehand. You can still use 3.x versions of Python in Hydrogen, but it will only build with 2.x due to a [longstanding issue with `gyp`](https://bugs.chromium.org/p/gyp/issues/detail?id=36).
 
-### No kernel for language X found, but I have a kernel for that language.
+### No kernel for language X found
 
-Currently, a recent version of Jupyter is required for Hydrogen to detect the
-available kernels automatically. Users can set kernels manually using the
-Hydrogen settings. See
-[this section](https://github.com/nteract/hydrogen#debian-8-and-ubuntu-1604-lts)
-in the [README](README.md) for more details.
+Hydrogen requires a Kernel to run code. Checkout [nteract.io/kernels](https://nteract.io/kernels) for instructions on how to install the most popular kernels.
 
 Atom won't pick up kernels inside a virtualenv unless Atom is launched as `atom .` within the virtualenv. The alternative is to [create a kernel specifically for a virtualenv](http://www.alfredo.motta.name/create-isolated-jupyter-ipython-kernels-with-pyenv-and-virtualenv/).
 
@@ -98,15 +60,24 @@ Again, there are a number of possible causes and solutions:
   [#53](https://github.com/nteract/hydrogen/issues/53) the details of your
   installation.
 
+
+
+
+
 ## Setting environment variables on Windows
 
-### Problem:
+
+### Hydrogen fails to import modules:
+If hydrogen works for standard libraries but you encounter `ModuleNotFoundError: No module named 'your_package'` for custom installed packages, check that the path of the kernel you are using is the one specified in the windows `PATH`. Especially when using virtual environments like `virtualenv` and `anaconda` ensure that the corresponding python executables are set in the windows path. 
+
+To add the path, enter `where python` in the windows command line and chose the apporiate entry. Then, add it manually to the windows `PATH`, similarly as detailed below for the standard python path.
+
+
+### Hydrogen does not recognize python:
 
 On Windows if Python is not added to your environment variables, Hydrogen won't be able to locate your Python installations (`No kernel specs found`).
 
 ![Kernel specs not found](https://preview.ibb.co/jw40ta/Screenshot_40.png)
-
-### Solution:
 
 To solve this problem you need to add Python to your systems environment variables. This can be done in 2 ways:
 

@@ -1,56 +1,35 @@
 "*":
-  "atom-clock": {}
-  "atom-easy-jsdoc":
-    useReturns: true
-  "atom-package-deps":
-    ignored: []
-  "autoclose-html":
-    makeNeverCloseSelfClosing: false
-  "autocomplete-plus":
-    confirmCompletion: "enter"
-    minimumWordLength: 1
-    useCoreMovementCommands: false
   core:
-    allowPendingPaneItems: false
     disabledPackages: [
-      "project-manager"
-      "fast-eslint"
-      "linter-js-standard"
-      "linter-csslint"
       "spell-check"
       "Hydrogen"
+      "linter-csslint"
     ]
     openEmptyEditorOnStart: false
-    packagesWithKeymapsDisabled: [
-      "autoclose-html"
-    ]
-    projectHome: "C:\\Users\\admin\\Desktop\\documents\\projects"
-    telemetryConsent: "no"
+    telemetryConsent: "limited"
     themes: [
       "atom-dark-ui"
       "atom-dark-syntax"
     ]
-    warnOnLargeFileLimit: 2
+    uriHandlerRegistration: "always"
+    warnOnLargeFileLimit: 10
+  "css-declaration-sorter":
+    sortOrder: "smacss"
   editor:
-    backUpBeforeSaving: true
     fontSize: 16
     scrollPastEnd: true
     scrollSensitivity: 60
+    softWrap: true
+    softWrapHangingIndent: 4
     zoomFontWhenCtrlScrolling: false
   "exception-reporting":
-    userId: "83917c78-9c35-f970-8767-722c39816fca"
-  "file-icons":
-    coloured: false
-    onChanges: true
-    tabPaneIcon: false
-  "linter-javac":
-    additionalClasspaths: "bin/"
-    additionalJavacOptions: "-sourcepath src/ -d bin"
-  "linter-js-standard":
-    showEslintRules: true
+    userId: "15a2251f-1d80-409f-a36f-2303a5136b85"
+  "linter-eslint":
+    ignoreFixableRulesWhileTyping: true
   "linter-ui-default":
     showPanel: true
   minimap:
+    independentMinimapScroll: true
     plugins:
       cursorline: true
       cursorlineDecorationsZIndex: 0
@@ -64,51 +43,7 @@
       linterDecorationsZIndex: 0
       selection: true
       selectionDecorationsZIndex: 0
-    redrawDelay: 300
-  "minimap-git-diff":
-    useGutterDecoration: true
-  "one-dark-ui": {}
-  "tree-view":
-    hideVcsIgnoredFiles: true
   welcome:
     showOnStartup: false
   whitespace:
     ensureSingleTrailingNewline: false
-    ignoreWhitespaceOnCurrentLine: false
-    ignoreWhitespaceOnlyLines: true
-  wordcount:
-    alwaysOn: true
-    noextension: true
-    showprice: true
-".basic.html.source":
-  editor:
-    tabLength: 4
-".basic.html.text":
-  editor:
-    tabLength: 4
-".c.source":
-  editor:
-    tabLength: 4
-".cpp.source":
-  editor:
-    tabLength: 4
-".css.source":
-  editor:
-    tabLength: 2
-".gfm.source":
-  editor:
-    showInvisibles: false
-    softWrap: true
-    tabLength: 4
-".java.source":
-  editor:
-    tabLength: 4
-".js.source":
-  editor:
-    tabLength: 2
-".python.source":
-  editor:
-    tabLength: 4
-".shell.source":
-  editor:
-    tabLength: 4

@@ -4,22 +4,24 @@ import SelectListView from "atom-select-list";
 import _ from "lodash";
 import tildify from "tildify";
 import v4 from "uuid/v4";
+import ws from "ws";
+import xhr from "xmlhttprequest";
+import { URL } from "url";
+import { Kernel, Session, ServerConnection } from "@jupyterlab/services";
 
 import Config from "./config";
-import { Kernel, Session } from "./jupyter-js-services-shim";
 import WSKernel from "./ws-kernel";
+import InputView from "./input-view";
 import store from "./store";
 
 class CustomListView {
-  emptyMessage: string;
-  onConfirmed: (kernelSpecs: Kernelspec) => void;
+  onConfirmed: ?Function = null;
+  onCancelled: ?Function = null;
   previouslyFocusedElement: ?HTMLElement;
   selectListView: SelectListView;
   panel: ?atom$Panel;
 
-  constructor(emptyMessage, onConfirmed) {
-    this.emptyMessage = emptyMessage;
-    this.onConfirmed = onConfirmed;
+  constructor() {
     this.previouslyFocusedElement = document.activeElement;
     this.selectListView = new SelectListView({
       itemsClassList: ["mark-active"],
@@ -32,12 +34,15 @@ class CustomListView {
       },
       didConfirmSelection: item => {
         if (this.onConfirmed) this.onConfirmed(item);
-        this.cancel();
       },
-      didCancelSelection: () => this.cancel(),
-      emptyMessage: this.emptyMessage
+      didCancelSelection: () => {
+        this.cancel();
+        if (this.onCancelled) this.onCancelled();
+      }
     });
+  }
 
+  show() {
     if (!this.panel) {
       this.panel = atom.workspace.addModalPanel({ item: this.selectListView });
     }
@@ -66,13 +71,15 @@ export default class WSKernelPicker {
   _onChosen: (kernel: Kernel) => void;
   _kernelSpecFilter: (kernelSpec: Kernelspec) => boolean;
   _path: string;
-  previouslyFocusedElement: ?HTMLElement;
+  listView: CustomListView;
 
   constructor(onChosen: (kernel: Kernel) => void) {
     this._onChosen = onChosen;
+    this.listView = new CustomListView();
   }
 
-  toggle(_kernelSpecFilter: (kernelSpec: Kernelspec) => boolean) {
+  async toggle(_kernelSpecFilter: (kernelSpec: Kernelspec) => boolean) {
+    this.listView.previouslyFocusedElement = document.activeElement;
     this._kernelSpecFilter = _kernelSpecFilter;
     const gateways = Config.getJson("gateways") || [];
     if (_.isEmpty(gateways)) {
@@ -82,131 +89,291 @@ export default class WSKernelPicker {
       });
       return;
     }
-    const path = store.editor ? store.editor.getPath() : null;
 
-    this._path = `${path || "unsaved"}-${v4()}`;
-    const gatewayListing = new CustomListView(
-      "No gateways available",
-      this.onGateway.bind(this)
-    );
-    this.previouslyFocusedElement = gatewayListing.previouslyFocusedElement;
-    gatewayListing.selectListView.update({
+    this._path = `${store.filePath || "unsaved"}-${v4()}`;
+
+    this.listView.onConfirmed = this.onGateway.bind(this);
+
+    await this.listView.selectListView.update({
       items: gateways,
-      infoMessage: "Select a gateway"
+      infoMessage: "Select a gateway",
+      emptyMessage: "No gateways available",
+      loadingMessage: null
     });
+
+    this.listView.show();
   }
 
-  onGateway(gatewayInfo: any) {
-    const sessionListing = new CustomListView(
-      "No sessions available",
-      this.onSession.bind(this)
-    );
-    Kernel.getSpecs(gatewayInfo.options)
-      .then(
-        specModels => {
-          const kernelSpecs = _.filter(specModels.kernelspecs, spec =>
-            this._kernelSpecFilter(spec)
-          );
+  async promptForText(prompt: string) {
+    const previouslyFocusedElement = this.listView.previouslyFocusedElement;
+    this.listView.cancel();
 
-          const kernelNames = _.map(kernelSpecs, specModel => specModel.name);
-
-          sessionListing.previouslyFocusedElement = this.previouslyFocusedElement;
-          sessionListing.selectListView.update({
-            loadingMessage: "Loading sessions..."
-          });
-
-          Session.listRunning(gatewayInfo.options).then(
-            sessionModels => {
-              sessionModels = sessionModels.filter(model => {
-                const name = model.kernel ? model.kernel.name : null;
-                return name ? kernelNames.includes(name) : true;
-              });
-              const items = sessionModels.map(model => {
-                let name;
-                if (model.notebook && model.notebook.path) {
-                  name = tildify(model.notebook.path);
-                } else {
-                  name = `Session ${model.id}`;
-                }
-                return {
-                  name,
-                  model,
-                  options: gatewayInfo.options
-                };
-              });
-              items.unshift({
-                name: "[new session]",
-                model: null,
-                options: gatewayInfo.options,
-                kernelSpecs
-              });
-              return sessionListing.selectListView.update({
-                items: items,
-                loadingMessage: null
-              });
-            },
-            () =>
-              // Gateways offer the option of never listing sessions, for security
-              // reasons.
-              // Assume this is the case and proceed to creating a new session.
-              this.onSession({
-                name: "[new session]",
-                model: null,
-                options: gatewayInfo.options,
-                kernelSpecs
-              })
-          );
-        },
-        () => atom.notifications.addError("Connection to gateway failed")
-      )
-      .then(() => {
-        sessionListing.selectListView.focus();
-        sessionListing.selectListView.reset();
+    const inputPromise = new Promise((resolve, reject) => {
+      const inputView = new InputView({ prompt }, resolve);
+      atom.commands.add(inputView.element, {
+        "core:cancel": () => {
+          inputView.close();
+          reject();
+        }
       });
+      inputView.attach();
+    });
+
+    let response;
+    try {
+      response = await inputPromise;
+      if (response === "") {
+        return null;
+      }
+    } catch (e) {
+      return null;
+    }
+
+    // Assume that no response to the prompt will cancel the entire flow, so
+    // only restore listView if a response was received
+    this.listView.show();
+    this.listView.previouslyFocusedElement = previouslyFocusedElement;
+    return response;
   }
 
-  onSession(sessionInfo: any) {
-    if (!sessionInfo.model) {
-      const kernelListing = new CustomListView(
-        "No kernel specs available",
-        this.startSession.bind(this)
-      );
-      kernelListing.previouslyFocusedElement = this.previouslyFocusedElement;
+  async promptForCookie(options: any) {
+    const cookie = await this.promptForText("Cookie:");
+    if (cookie === null) {
+      return false;
+    }
 
+    if (options.requestHeaders === undefined) {
+      options.requestHeaders = {};
+    }
+    options.requestHeaders.Cookie = cookie;
+    options.xhrFactory = () => {
+      let request = new xhr.XMLHttpRequest();
+      // Disable protections against setting the Cookie header
+      request.setDisableHeaderCheck(true);
+      return request;
+    };
+    options.wsFactory = (url, protocol) => {
+      // Authentication requires requests to appear to be same-origin
+      let parsedUrl = new URL(url);
+      if (parsedUrl.protocol == "wss:") {
+        parsedUrl.protocol = "https:";
+      } else {
+        parsedUrl.protocol = "http:";
+      }
+      const headers = { Cookie: cookie };
+      const origin = parsedUrl.origin;
+      const host = parsedUrl.host;
+      return new ws(url, protocol, { headers, origin, host });
+    };
+    return true;
+  }
+
+  async promptForToken(options: any) {
+    const token = await this.promptForText("Token:");
+    if (token === null) {
+      return false;
+    }
+
+    options.token = token;
+    return true;
+  }
+
+  async promptForCredentials(options: any) {
+    await this.listView.selectListView.update({
+      items: [
+        {
+          name: "Authenticate with a token",
+          action: "token"
+        },
+        {
+          name: "Authenticate with a cookie",
+          action: "cookie"
+        },
+        {
+          name: "Cancel",
+          action: "cancel"
+        }
+      ],
+      infoMessage:
+        "Connection to gateway failed. Your settings may be incorrect, the server may be unavailable, or you may lack sufficient privileges to complete the connection.",
+      loadingMessage: null,
+      emptyMessage: null
+    });
+
+    const action = await new Promise((resolve, reject) => {
+      this.listView.onConfirmed = item => resolve(item.action);
+      this.listView.onCancelled = () => resolve("cancel");
+    });
+    if (action === "token") {
+      return await this.promptForToken(options);
+    } else if (action === "cookie") {
+      return await this.promptForCookie(options);
+    } else {
+      // action === "cancel"
+      this.listView.cancel();
+      return false;
+    }
+  }
+
+  async onGateway(gatewayInfo: any) {
+    this.listView.onConfirmed = null;
+    await this.listView.selectListView.update({
+      items: [],
+      infoMessage: null,
+      loadingMessage: "Loading sessions...",
+      emptyMessage: "No sessions available"
+    });
+
+    const gatewayOptions = Object.assign(
+      {
+        xhrFactory: () => new xhr.XMLHttpRequest(),
+        wsFactory: (url, protocol) => new ws(url, protocol)
+      },
+      gatewayInfo.options
+    );
+
+    let serverSettings = ServerConnection.makeSettings(gatewayOptions);
+    let specModels;
+
+    try {
+      specModels = await Kernel.getSpecs(serverSettings);
+    } catch (error) {
+      // The error types you get back at this stage are fairly opaque. In
+      // particular, having invalid credentials typically triggers ECONNREFUSED
+      // rather than 403 Forbidden. This does some basic checks and then assumes
+      // that all remaining error types could be caused by invalid credentials.
+      if (!error.xhr || !error.xhr.responseText) {
+        throw error;
+      } else if (error.xhr.responseText.includes("ETIMEDOUT")) {
+        atom.notifications.addError("Connection to gateway failed");
+        this.listView.cancel();
+        return;
+      } else {
+        const promptSucceeded = await this.promptForCredentials(gatewayOptions);
+        if (!promptSucceeded) {
+          return;
+        }
+        serverSettings = ServerConnection.makeSettings(gatewayOptions);
+        await this.listView.selectListView.update({
+          items: [],
+          infoMessage: null,
+          loadingMessage: "Loading sessions...",
+          emptyMessage: "No sessions available"
+        });
+      }
+    }
+
+    try {
+      if (!specModels) {
+        specModels = await Kernel.getSpecs(serverSettings);
+      }
+
+      const kernelSpecs = _.filter(specModels.kernelspecs, spec =>
+        this._kernelSpecFilter(spec)
+      );
+
+      const kernelNames = _.map(kernelSpecs, specModel => specModel.name);
+
+      try {
+        let sessionModels = await Session.listRunning(serverSettings);
+        sessionModels = sessionModels.filter(model => {
+          const name = model.kernel ? model.kernel.name : null;
+          return name ? kernelNames.includes(name) : true;
+        });
+        const items = sessionModels.map(model => {
+          let name;
+          if (model.path) {
+            name = tildify(model.path);
+          } else if (model.notebook && model.notebook.path) {
+            name = tildify(model.notebook.path);
+          } else {
+            name = `Session ${model.id}`;
+          }
+          return { name, model, options: serverSettings };
+        });
+        items.unshift({
+          name: "[new session]",
+          model: null,
+          options: serverSettings,
+          kernelSpecs
+        });
+        this.listView.onConfirmed = this.onSession.bind(this, gatewayInfo.name);
+        await this.listView.selectListView.update({
+          items: items,
+          loadingMessage: null
+        });
+      } catch (error) {
+        if (!error.xhr || error.xhr.status !== 403) throw error;
+        // Gateways offer the option of never listing sessions, for security
+        // reasons.
+        // Assume this is the case and proceed to creating a new session.
+        this.onSession(gatewayInfo.name, {
+          name: "[new session]",
+          model: null,
+          options: serverSettings,
+          kernelSpecs
+        });
+      }
+    } catch (e) {
+      atom.notifications.addError("Connection to gateway failed");
+      this.listView.cancel();
+    }
+  }
+
+  async onSession(gatewayName: string, sessionInfo: any) {
+    if (!sessionInfo.model) {
+      if (!sessionInfo.name) {
+        await this.listView.selectListView.update({
+          items: [],
+          errorMessage: "This gateway does not support listing sessions",
+          loadingMessage: null,
+          infoMessage: null
+        });
+      }
       const items = _.map(sessionInfo.kernelSpecs, spec => {
-        const options = Object.assign({}, sessionInfo.options);
-        options.kernelName = spec.name;
-        options.path = this._path;
+        const options = {
+          serverSettings: sessionInfo.options,
+          kernelName: spec.name,
+          path: this._path
+        };
         return {
           name: spec.display_name,
           options
         };
       });
-      kernelListing.selectListView.update({ items: items });
-      kernelListing.selectListView.focus();
-      kernelListing.selectListView.reset();
-      if (!sessionInfo.name) {
-        kernelListing.selectListView.update({
-          errorMessage: "This gateway does not support listing sessions"
-        });
-      }
+
+      this.listView.onConfirmed = this.startSession.bind(this, gatewayName);
+      await this.listView.selectListView.update({
+        items: items,
+        emptyMessage: "No kernel specs available",
+        infoMessage: "Select a session",
+        loadingMessage: null
+      });
     } else {
-      Session.connectTo(sessionInfo.model.id, sessionInfo.options).then(
-        this.onSessionChosen.bind(this)
+      this.onSessionChosen(
+        gatewayName,
+        await Session.connectTo(sessionInfo.model.id, sessionInfo.options)
       );
     }
   }
 
-  startSession(sessionInfo: any) {
-    Session.startNew(sessionInfo.options).then(this.onSessionChosen.bind(this));
+  startSession(gatewayName: string, sessionInfo: any) {
+    Session.startNew(sessionInfo.options).then(
+      this.onSessionChosen.bind(this, gatewayName)
+    );
   }
 
-  onSessionChosen(session: any) {
-    session.kernel.getSpec().then(kernelSpec => {
-      if (!store.grammar) return;
+  async onSessionChosen(gatewayName: string, session: any) {
+    this.listView.cancel();
+    const kernelSpec = await session.kernel.getSpec();
+    if (!store.grammar) return;
 
-      const kernel = new WSKernel(kernelSpec, store.grammar, session);
-      this._onChosen(kernel);
-    });
+    const kernel = new WSKernel(
+      gatewayName,
+      kernelSpec,
+      store.grammar,
+      session
+    );
+    this._onChosen(kernel);
   }
 }

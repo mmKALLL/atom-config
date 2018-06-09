@@ -13,3 +13,7 @@
 atom.commands.add 'atom-text-editor',
   'custom:insert-pipe': ->
     atom.workspace.getActiveTextEditor()?.insertText('|')
+  'custom:insert-quote': ->
+    atom.workspace.getActiveTextEditor()?.insertText('"')
+  'custom:insert-at-mark': ->
+    atom.workspace.getActiveTextEditor()?.insertText('@')

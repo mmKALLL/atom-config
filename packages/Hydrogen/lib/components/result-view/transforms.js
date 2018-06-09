@@ -1,25 +1,26 @@
 /* @flow */
 
-import { allowUnsafeNewFunction } from "loophole";
 import {
   standardTransforms,
   standardDisplayOrder,
   registerTransform
 } from "@nteract/transforms";
-
-// Due to Atom's CSP we need to use loophole :(
-let PlotlyTransform;
-allowUnsafeNewFunction(() => {
-  PlotlyTransform = require("@nteract/transform-plotly").default;
-});
+import PlotlyTransform from "@nteract/transform-plotly";
+import { VegaLite1, VegaLite2, Vega2, Vega3 } from "@nteract/transform-vega";
 
 // We can easily add other transforms here:
-const additionalTransforms: Array<any> = [PlotlyTransform];
+const additionalTransforms: Array<any> = [
+  PlotlyTransform,
+  VegaLite1,
+  VegaLite2,
+  Vega2,
+  Vega3
+];
 
-export const {
-  transforms,
-  displayOrder
-} = additionalTransforms.reduce(registerTransform, {
-  transforms: standardTransforms,
-  displayOrder: standardDisplayOrder
-});
+export const { transforms, displayOrder } = additionalTransforms.reduce(
+  registerTransform,
+  {
+    transforms: standardTransforms,
+    displayOrder: standardDisplayOrder
+  }
+);
