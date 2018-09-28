@@ -5,8 +5,12 @@ import { Point, Range } from "atom";
 import escapeStringRegexp from "escape-string-regexp";
 import _ from "lodash";
 
-import store from "./store";
-import { log, isMultilanguageGrammar, getEmbeddedScope } from "./utils";
+import {
+  log,
+  isMultilanguageGrammar,
+  getEmbeddedScope,
+  rowRangeForCodeFoldAtBufferRow
+} from "./utils";
 
 export function normalizeString(code: ?string) {
   if (code) {
@@ -73,7 +77,7 @@ export function escapeBlankRows(
 }
 
 export function getFoldRange(editor: atom$TextEditor, row: number) {
-  const range = editor.languageMode.rowRangeForCodeFoldAtBufferRow(row);
+  const range = rowRangeForCodeFoldAtBufferRow(editor, row);
   if (!range) return;
   if (
     range[1] < editor.getLastBufferRow() &&
@@ -115,9 +119,12 @@ export function getCodeToInspect(editor: atom$TextEditor) {
 }
 
 export function getRegexString(editor: atom$TextEditor) {
-  const scope = editor.getRootScopeDescriptor();
-
-  const { commentStartString } = editor.getCommentStrings(scope);
+  const {
+    commentStartString
+    // $FlowFixMe: This is an unofficial API
+  } = editor.tokenizedBuffer.commentStringsForPosition(
+    editor.getCursorBufferPosition()
+  );
 
   if (!commentStartString) {
     log("CellManager: No comment string defined in root scope");
@@ -311,7 +318,7 @@ export function findCodeBlock(editor: atom$TextEditor) {
 
   const indentLevel = cursor.getIndentLevel();
   let foldable = editor.isFoldableAtBufferRow(row);
-  const foldRange = editor.languageMode.rowRangeForCodeFoldAtBufferRow(row);
+  const foldRange = rowRangeForCodeFoldAtBufferRow(editor, row);
   if (!foldRange || foldRange[0] == null || foldRange[1] == null) {
     foldable = false;
   }

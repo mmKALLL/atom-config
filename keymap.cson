@@ -41,7 +41,7 @@
 'atom-workspace atom-text-editor':
   'alt-right': 'editor:move-to-end-of-screen-line'
   'alt-left': 'editor:move-to-first-character-of-line'
-    
+
 'body':
   'ctrl-tab ^ctrl': 'unset!'
   'ctrl-tab': 'pane:show-next-item'
@@ -56,6 +56,7 @@
   'ctrl-shift-left': 'editor:select-to-previous-subword-boundary'
   'ctrl-shift-right': 'editor:select-to-next-subword-boundary'
   'ctrl-backspace': 'editor:delete-to-beginning-of-subword'
+  'alt-f3': 'find-and-replace:replace-next'
 
 'atom-text-editor[data-grammar~="html"]':
   '>': 'autoclose-html:close-and-complete'

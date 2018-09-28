@@ -1,0 +1,112 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+        "spec": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+        "type": "local"
+      },
+      "/tmp/apm-install-dir-118430-10273-rfyyzx.3pq89w9udi"
+    ]
+  ],
+  "_from": "../d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+  "_id": "linter-swagger@0.4.2",
+  "_inCache": true,
+  "_location": "/linter-swagger",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+    "spec": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+  "_shasum": "3214414eb79f2ce2aaab5cd3210bc9cc38089b1c",
+  "_shrinkwrap": null,
+  "_spec": "/tmp/d-118430-10273-4fx2lq.6f35scq5mi/package.tgz",
+  "_where": "/tmp/apm-install-dir-118430-10273-rfyyzx.3pq89w9udi",
+  "bugs": {
+    "url": "https://github.com/AtomLinter/linter-swagger/issues"
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.0.1",
+    "lodash": "^4.16.4",
+    "swagger-parser": "3.4.2",
+    "yaml-js": "^0.2.0"
+  },
+  "description": "Lint Swagger files on the fly, using swagger-parser",
+  "devDependencies": {
+    "eslint": "^4.5.0",
+    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint-plugin-import": "^2.7.0"
+  },
+  "engines": {
+    "atom": ">=1.9.0 <2.0.0"
+  },
+  "eslintConfig": {
+    "extends": "airbnb-base",
+    "rules": {
+      "global-require": "off",
+      "import/extensions": [
+        "off",
+        "never"
+      ],
+      "import/no-unresolved": [
+        "error",
+        {
+          "ignore": [
+            "atom"
+          ]
+        }
+      ]
+    },
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "globals": {
+      "atom": true
+    }
+  },
+  "homepage": "https://github.com/AtomLinter/linter-swagger#readme",
+  "keywords": [
+    "swagger",
+    "linter",
+    "atom"
+  ],
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "linter-swagger",
+  "optionalDependencies": {},
+  "package-deps": [
+    "linter"
+  ],
+  "providedServices": {
+    "linter": {
+      "versions": {
+        "1.0.0": "provideLinter"
+      }
+    }
+  },
+  "readme": "# linter-swagger\n\n[![Build Status](https://travis-ci.org/AtomLinter/linter-swagger.svg?branch=master)](https://travis-ci.org/AtomLinter/linter-swagger)\n[![bitHound Overall Score](https://www.bithound.io/github/AtomLinter/linter-swagger/badges/score.svg)](https://www.bithound.io/github/AtomLinter/linter-swagger)\n[![bitHound Dependencies](https://www.bithound.io/github/AtomLinter/linter-swagger/badges/dependencies.svg)](https://www.bithound.io/github/AtomLinter/linter-swagger/master/dependencies/npm)\n[![Package version!](https://img.shields.io/apm/v/linter-swagger.svg?style=flat)](https://atom.io/packages/linter-swagger)\n\nThis plugin for [Linter][linter] will lint\n[Swagger 2.0 specifications][swagger], both JSON and YAML using\n[`swagger-parser` node package][swagger-parser].\n\n## Installation\n\nInstall `linter-swagger` either in Atom's Preferences/Install Packages, or with\n`apm` on the command-line:\n\n```sh\napm install linter-swagger\n```\n\nThis package will automatically install `linter` if that is missing.\n\n## Usage\n\nThis package will automatically lint YAML and JSON files that have a `swagger` field\nwith a version number value, in accordance to the [Swagger spec](http://swagger.io/specification/).\n\n## License\n\nMIT. More info in the [LICENSE file](./LICENSE.md)\n\n[linter]: https://github.com/AtomLinter/Linter \"Linter Atom Package\"\n[swagger]: http://swagger.io/ \"Swagger Main Site\"\n[swagger-parser]: https://www.npmjs.com/package/swagger-parser \"Swagger Parser NPM Page\"\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AtomLinter/linter-swagger.git"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "apm test"
+  },
+  "version": "0.4.2"
+}

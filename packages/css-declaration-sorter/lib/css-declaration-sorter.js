@@ -66,8 +66,10 @@ function sort (sortOrder) {
   const syntax = syntaxes[editor.getGrammar().name];
 
   return postcss([cssDeclarationSorter({ order: sortOrder })])
-    .process(editor.getText(), { syntax: syntax })
+    .process(editor.getText(), { syntax: syntax, from: undefined })
     .then(function (result) {
+      if (result.content === editor.getText()) return;
+
       const cursorPosition = editor.getCursorScreenPosition();
       editor.setText(result.content);
       editor.setCursorScreenPosition(cursorPosition);

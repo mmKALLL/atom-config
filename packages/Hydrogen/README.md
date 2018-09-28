@@ -4,7 +4,7 @@
 [![Greenkeeper badge](https://badges.greenkeeper.io/nteract/hydrogen.svg)](https://greenkeeper.io/)
 [![Build Status](https://travis-ci.org/nteract/hydrogen.svg?branch=master)](https://travis-ci.org/nteract/hydrogen)
 
-This package lets you run your code directly in Atom using any [Jupyter](https://jupyter.org/) kernels you have installed.
+Hydrogen is an interactive coding environment that supports Python, R, JavaScript and [other Jupyter kernels](https://github.com/jupyter/jupyter/wiki/Jupyter-kernels).
 
 Checkout our [Documentation](https://nteract.gitbooks.io/hydrogen/) and [Medium blog post](https://medium.com/nteract/hydrogen-interactive-computing-in-atom-89d291bcc4dd) to see what you can do with Hydrogen.
 
@@ -51,6 +51,7 @@ You also may be interested in our latest project – [nteract](https://github.co
 
 Hydrogen has support for plugins. Feel free to add your own to the list:
 - [Hydrogen Launcher](https://github.com/lgeiger/hydrogen-launcher)
+- [hydrogen-python](https://github.com/nikitakit/hydrogen-python)
 
 If you are interested in building a plugin take a look at our [plugin API documentation](https://nteract.gitbooks.io/hydrogen/docs/PluginAPI.md).
 

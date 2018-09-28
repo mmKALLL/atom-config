@@ -1,0 +1,63 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+        "spec": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+        "type": "local"
+      },
+      "/tmp/apm-install-dir-118828-28441-1k0r72j.40jc2nvcxr"
+    ]
+  ],
+  "_from": "../d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+  "_id": "atom-big-comment@0.1.1",
+  "_inCache": true,
+  "_location": "/atom-big-comment",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+    "spec": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+  "_shasum": "55443776d3f255a3a9238fe0af62801c2c8facf4",
+  "_shrinkwrap": null,
+  "_spec": "/tmp/d-118828-28441-d5p7jl.lopp6wdn29/package.tgz",
+  "_where": "/tmp/apm-install-dir-118828-28441-1k0r72j.40jc2nvcxr",
+  "activationCommands": {
+    "atom-workspace": "atom-big-comment:toggle"
+  },
+  "bugs": {
+    "url": "https://github.com/jostw/atom-big-comment/issues"
+  },
+  "dependencies": {},
+  "description": "Generate ascii-art comment to display text on Minimap in Atom",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "homepage": "https://github.com/jostw/atom-big-comment#readme",
+  "keywords": [],
+  "license": "MIT",
+  "main": "./lib/atom-big-comment",
+  "name": "atom-big-comment",
+  "optionalDependencies": {},
+  "readme": "# atom-big-comment\n\nGenerate ascii-art comment to display text on Minimap in Atom.\n\nThis is the atom version of [BigComment](https://github.com/manse/BigComment) package in Sublime Text.\n\n## Install\n\n```sh\napm install atom-big-comment\n```\n\nOr search for `atom-big-comment` in Atom settings view.\n\n## Usage\n\n- Mac: Cmd + Option + C\n\n## Lisence\n\nMIT\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jostw/atom-big-comment.git"
+  },
+  "version": "0.1.1"
+}

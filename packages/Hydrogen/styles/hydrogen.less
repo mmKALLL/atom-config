@@ -13,6 +13,7 @@
 @hydrogen-inline-color: lighten(@syntax-text-color, 10%);
 @hydrogen-error-color: average(@syntax-text-color, red);
 
+
 .hydrogen.marker {
   display: flex;
 }
@@ -63,6 +64,12 @@ svg:first-child {
     }
 }
 
+.js-plotly-plot {
+    svg {
+        background-color: unset;
+    }
+}
+
 .nteract-display-area-stderr {
   color: @hydrogen-error-color;
 }
@@ -75,7 +82,7 @@ svg:first-child {
   box-shadow: 0 0 3px 0 rgba(0,0,0,0.3);
 }
 
-.inline-container .cell_display {
+.inline-container .hydrogen_cell_display {
   padding: 0 0.25em 0 0.25em;
 }
 
@@ -94,9 +101,14 @@ svg:first-child {
   border: solid 1px @base-border-color;
 }
 
-.multiline-container .cell_display {
+.multiline-container .hydrogen_cell_display {
   padding: @component-padding;
   // Style fix for plotly toolbar
+  .cell_display {
+    overflow-y: hidden;
+    display: initial;
+    height: 100%;
+  }
   .modebar-group {
     display: flex;
   }
@@ -184,10 +196,19 @@ svg:first-child {
       height: @btn-size;
       border-radius: @component-border-radius;
       border: 1px solid @button-border-color;
+      margin-left: -(@btn-size / 2);
+      left: @btn-size / 2;
       background: @button-background-color;
       &:hover {
         background: @button-background-color-hover;
       }
+      &:focus {
+        border-color: @button-background-color-selected;
+      }
+    }
+
+    .rangeslider__labels {
+      display: none;
     }
   }
 }
@@ -236,7 +257,35 @@ svg:first-child {
     .cell_display {
       height: 100%;
       padding: 0;
+
+      > div {
+        margin-bottom: 10px;
+        margin-top: 10px;
+      }
     }
+  }
+
+}
+
+// ----------- Kernel Monitor -------------
+.kernel-monitor {
+  header {
+    line-height: 2.5em;
+    font-weight: 600;
+    border-bottom: 1px solid @base-border-color;
+    padding: 0 10px;
+  }
+
+  div:not(:first-child) header {
+    border-top: 1px solid @base-border-color;
+  }
+
+  .icon::before {
+    width: 100%;
+  }
+
+  .icon:hover {
+    color: @text-color-error;
   }
 }
 
@@ -244,6 +293,7 @@ svg:first-child {
 
 .watch-sidebar {
   overflow-y: auto;
+  height: 100%;
 
   .watch-view {
     .watch-input {
@@ -278,6 +328,10 @@ svg:first-child {
 .hydrogen.input-view {
   .label {
       padding-bottom: @component-padding;
+  }
+
+  &.password .scroll-view {
+    -webkit-text-security: disc;
   }
 }
 

@@ -1,0 +1,65 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+        "spec": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+        "type": "local"
+      },
+      "/tmp/apm-install-dir-118418-554-1c0wpl1.8yocgqr529"
+    ]
+  ],
+  "_from": "../d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+  "_id": "language-crystal-actual@0.37.2",
+  "_inCache": true,
+  "_location": "/language-crystal-actual",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+    "spec": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+  "_shasum": "90f48ca387910b7e2d0705d8cb4cbaacdf7d4665",
+  "_shrinkwrap": null,
+  "_spec": "/tmp/d-118418-554-1xz1ikv.mxuzzg2e29/package.tgz",
+  "_where": "/tmp/apm-install-dir-118418-554-1c0wpl1.8yocgqr529",
+  "atomTestRunner": "atom-test-runner-jest",
+  "bugs": {
+    "url": "https://github.com/crystal-lang-tools/language-crystal/issues"
+  },
+  "dependencies": {},
+  "description": "Crystal language support in Atom",
+  "devDependencies": {
+    "atom-test-runner-jest": "0.1.1"
+  },
+  "engines": {
+    "atom": "*",
+    "node": "*"
+  },
+  "homepage": "https://github.com/crystal-lang-tools/language-crystal#readme",
+  "license": "MIT",
+  "name": "language-crystal-actual",
+  "optionalDependencies": {},
+  "readme": "# Crystal language support in Atom\n\nAdds syntax highlighting and snippets to Crystal files in Atom.\n\nContributions are greatly appreciated. Please fork this repository and open a\npull request to add snippets, make grammar tweaks, etc.\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crystal-lang-tools/language-crystal.git"
+  },
+  "scripts": {
+    "test": "apm test"
+  },
+  "version": "0.37.2"
+}
