@@ -12,18 +12,41 @@ class WordcountView
 
     @element.appendChild(@divWords)
 
+    @wordregex = require('word-regex')()
+
+  charactersToHMS: (c) ->
+    # 1- Convert to seconds:
+    temp = c * 60
+    seconds = temp / atom.config.get('wordcount.charactersPerSeconds')
+    # 2- Extract hours:
+    #var hours = parseInt( seconds / 3600 ); // 3,600 seconds in 1 hour
+    seconds = seconds % 3600
+    # seconds remaining after extracting hours
+    # 3- Extract minutes:
+    minutes = parseInt(seconds / 60)
+    # 60 seconds in 1 minute
+    # 4- Keep only seconds not extracted to minutes:
+    seconds = Math.round(seconds % 60)
+    minutes = ('0' + minutes).slice(-2)
+    seconds = ('0' + seconds).slice(-2)
+    minutes + ':' + seconds
 
   update_count: (editor) ->
     texts = @getTexts editor
+    scope = editor.getGrammar().scopeName
     wordCount = charCount = 0
     for text in texts
+      text = @stripText text, editor
       [words, chars] = @count text
       wordCount += words
       charCount += chars
-    @divWords.innerHTML = "#{wordCount || 0} W"
-    @divWords.innerHTML += (" | #{charCount || 0} C") unless atom.config.get('wordcount.hidechars')
-    priceResult = wordCount*atom.config.get('wordcount.wordprice')
-    @divWords.innerHTML += (" | #{priceResult.toFixed(2) || 0} ")+atom.config.get('wordcount.currencysymbol') if atom.config.get('wordcount.showprice')
+    str = ''
+    str += "<span class='wordcount-words'>#{wordCount || 0} W</span>" if atom.config.get 'wordcount.showwords'
+    str += ("<span class='wordcount-chars'>#{charCount || 0} C</span>") if atom.config.get 'wordcount.showchars'
+    str += ("<span class='wordcount-time'>#{ @charactersToHMS charCount || 0}</span>") if atom.config.get 'wordcount.showtime'
+    priceResult = wordCount*atom.config.get 'wordcount.wordprice'
+    str += ("<span class='wordcount-price'>#{priceResult.toFixed(2) || 0} </span>") + atom.config.get 'wordcount.currencysymbol' if atom.config.get 'wordcount.showprice'
+    @divWords.innerHTML = str
     if goal = atom.config.get 'wordcount.goal'
       if not @divGoal
         @divGoal = document.createElement 'div'
@@ -32,7 +55,8 @@ class WordcountView
       green = Math.round(wordCount / goal * 100)
       green = 100 if green > 100
       color = atom.config.get 'wordcount.goalColor'
-      @divGoal.style.background = '-webkit-linear-gradient(left, ' + color + ' ' + green + '%, transparent 0%)'
+      colorBg = atom.config.get 'wordcount.goalBgColor'
+      @divGoal.style.background = '-webkit-linear-gradient(left, ' + color + ' ' + green + '%, ' + colorBg + ' 0%)'
       percent = parseFloat(atom.config.get 'wordcount.goalLineHeight') / 100
       height = @element.clientHeight * percent
       @divGoal.style.height = height + 'px'
@@ -60,12 +84,34 @@ class WordcountView
 
     texts
 
+  stripText: (text, editor) ->
+    grammar = editor.getGrammar().scopeName
+    stripgrammars = atom.config.get('wordcount.stripgrammars')
+
+    if grammar in stripgrammars
+
+      if atom.config.get('wordcount.ignorecode')
+        codePatterns = [/`{3}(.|\s)*?(`{3}|$)/g, /[ ]{4}.*?$/gm]
+        for pattern in codePatterns
+          text = text?.replace pattern, ''
+
+      if atom.config.get('wordcount.ignorecomments')
+        commentPatterns = [/(<!--(\n?(?:(?!-->).)*)+(-->|$))/g, /({>>(\n?(?:(?!<<}).)*)+(<<}|$))/g]
+        for pattern in commentPatterns
+          text = text?.replace pattern, ''
+
+      if atom.config.get('wordcount.ignoreblockquotes')
+        blockquotePatterns = [/^\s{0,3}>(.*\S.*\n)+/gm]
+        for pattern in blockquotePatterns
+          text = text?.replace pattern, ''
+
+      # Reduce links to text
+      text = text?.replace /(?:__|[*#])|\[(.*?)\]\(.*?\)/gm, '$1'
+
+    text
+
   count: (text) ->
-    if atom.config.get('wordcount.ignorecode')
-      codePatterns = [/`{3}(.|\s)*?(`{3}|$)/g, /[ ]{4}.*?$/gm]
-      for pattern in codePatterns
-        text = text?.replace pattern, ''
-    words = text?.match(/\S+/g)?.length
+    words = text?.match(@wordregex)?.length
     text = text?.replace '\n', ''
     text = text?.replace '\r', ''
     chars = text?.length
